@@ -1,0 +1,3948 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Turk-Barlos shevalari</title>
+
+    <style>
+      .cards-container {
+        display: flex;
+        flex-wrap: wrap; /* kartalar pastga o‘tadi */
+        gap: 20px; /* kartalar orasidagi bo‘shliq */
+        justify-content: center;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 200px; /* barcha kartalar bir xil kenglik */
+        text-align: center;
+        transition: transform 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .card img {
+        width: 100%;
+        height: 200px; /* barcha rasm balandligi bir xil */
+        object-fit: cover; /* rasmni kesmasdan sig'dirish */
+      }
+
+      .card-content {
+        padding: 15px;
+      }
+
+      .card-content h3 {
+        font-size: 18px;
+        margin: 10px 0 5px 0;
+      }
+
+      .card-content p {
+        font-size: 14px;
+        color: #555;
+      }
+      .audio-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .audio-item {
+        display: flex;
+        align-items: center;
+        background: #f9f5e8;
+        padding: 10px 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .audio-thumb {
+        font-size: 30px;
+        margin-right: 15px;
+      }
+
+      .audio-info h4 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+        color: #8b6f47;
+      }
+
+      .audio-info audio {
+        width: 300px; /* pleer uzunligi */
+      }
+
+      @media (max-width: 600px) {
+        .audio-info audio {
+          width: 100%;
+        }
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial;
+        background: #f5f2d0;
+        color: #8b6f47;
+      }
+      header {
+        background: #d9c97c;
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      header h1 {
+        font-size: 22px;
+        margin: 0;
+      }
+      header img {
+        height: 40px;
+      }
+
+      /* CONTAINER */
+      .container {
+        display: flex;
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        width: 220px;
+        background-color: #eee6b5;
+        padding: 20px;
+        min-height: 100%; /* Sahifa balandligiga moslashadi */
+      }
+
+      .sidebar li {
+        cursor: pointer;
+        padding: 6px;
+      }
+      .sidebar li:hover {
+        background: #d9c97c;
+      }
+      .sidebar a {
+        color: inherit;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+      }
+      .sidebar a:hover {
+        text-decoration: underline;
+      }
+
+      .submenu {
+        display: none;
+        padding-left: 15px;
+      }
+
+      /* CONTENT */
+      .content {
+        flex: 1;
+        padding: 20px;
+      }
+      .section {
+        display: none;
+      }
+      .active {
+        display: block;
+      }
+
+      /* VIDEO */
+      video {
+        width: 100%;
+        max-height: 560px;
+        border: 3px solid #c2b280;
+      }
+
+      /* IMAGE */
+      .section img {
+        max-width: 90%;
+        margin: 10px 0;
+        border: 2px solid #c2b280;
+      }
+
+      /* VIDEO LIST */
+      .video-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .video-item {
+        background: white;
+        border: 2px solid #c2b280;
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: pointer;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+        display: flex;
+        flex-direction: column;
+      }
+      .video-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+      }
+      .video-item .video-thumb {
+        background: #f3ecbc;
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        color: #8b6f47;
+      }
+      .video-item h4 {
+        margin: 12px;
+        font-size: 15px;
+        color: #5d452c;
+        line-height: 1.4;
+        flex: 1;
+      }
+      .video-player-container {
+        margin-top: 25px;
+        max-width: 720px;
+      }
+      .video-player-container video {
+        width: 100%;
+        border: 3px solid #c2b280;
+        border-radius: 8px;
+        background: black;
+      }
+      .video-section-inner {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      .video-section-inner .video-player-container {
+        flex: 1 1 60%;
+        min-width: 300px;
+      }
+      .video-text-list {
+        flex: 0 0 35%;
+        min-width: 220px;
+        margin-top: 0;
+        padding-left: 0;
+        max-width: 320px;
+      }
+      .video-text-item {
+        padding: 10px 14px;
+        border-bottom: 1px solid #c2b280;
+        cursor: pointer;
+        color: #5d452c;
+        font-weight: bold;
+      }
+      .video-text-item:hover {
+        background: #f3ecbc;
+      }
+      .video-text-item:last-child {
+        border-bottom: none;
+      }
+
+      /* MAP SECTION */
+      .big-section {
+        margin: 20px auto 20px auto;
+        position: relative;
+        max-width: 720px;
+      }
+      .big-section img {
+        width: 100%;
+        max-width: 100%;
+        max-height: 280px;
+      }
+
+      /* SMALL CARDS */
+      .small-cards-container {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(150px, 1fr));
+        gap: 15px;
+        margin: 20px auto;
+        max-width: 720px;
+      }
+      .small-card {
+        background: white;
+        border: 2px solid #c2b280;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        text-align: center;
+        cursor: pointer;
+      }
+      .small-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+      .small-card img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+      }
+      .small-card h4 {
+        color: #d9691c;
+        margin: 8px 0;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      /* CONTACT FORM */
+      #contact {
+        padding: 40px 20px;
+        background-color: #f5f2d0;
+        color: #8b6f47;
+        max-width: 600px;
+        margin: 0 auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      #contact h2 {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+
+      .contact-info {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .contact-info a {
+        display: block;
+        color: #8b6f47;
+        text-decoration: none;
+        margin: 5px 0;
+      }
+
+      .contact-form form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .form-group label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        padding: 10px;
+        border: 1px solid #d9c97c;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 16px;
+        resize: vertical;
+      }
+
+      .form-group.checkbox-group {
+        display: flex;
+        align-items: center;
+      }
+
+      .form-group.checkbox-group label {
+        margin-left: 8px;
+        font-weight: normal;
+      }
+
+      .btn-submit {
+        padding: 12px;
+        background-color: #d9c97c;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        color: #fff;
+        font-weight: bold;
+        transition: background-color 0.3s;
+      }
+
+      .btn-submit:hover {
+        background-color: #c0b15c;
+      }
+      .text-box {
+        background: #fff8dc;
+        border: 2px solid #c2b280;
+        border-left: 6px solid #d9691c;
+        padding: 15px;
+        border-radius: 8px;
+        line-height: 1.7;
+        margin-top: 15px;
+
+        max-height: 400px; /* 🔥 MUHIM */
+        overflow-y: auto; /* 🔥 SCROLL */
+      }
+      .alphabet-table-wrapper {
+        border: 2px solid #8b6f47; /* tashqi ramka */
+        padding: 10px;
+        overflow-x: auto; /* gorizontal scroll */
+        max-width: 100%;
+      }
+
+      .alphabet-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 800px; /* scroll paydo bo‘lishi uchun minimal kenglik */
+      }
+
+      .alphabet-table th,
+      .alphabet-table td {
+        border: 1px solid #ccc; /* katakchalar chiziqlari */
+        padding: 8px 12px;
+        text-align: left;
+      }
+
+      .alphabet-table th {
+        background-color: #f5f5dc; /* ustun sarlavhalari rangi */
+      }
+
+      .alphabet-table tr:nth-child(even) {
+        background-color: #fafafa; /* juft qatorlar rangi */
+      }
+      .sheva-table-wrapper {
+        border: 2px solid #8b6f47; /* tashqi ramka */
+        padding: 10px;
+        overflow-x: auto; /* gorizontal scroll */
+        max-width: 100%;
+      }
+
+      .sheva-table-wrapper p {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .sheva-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 800px; /* scroll paydo bo‘lishi uchun minimal kenglik */
+      }
+
+      .sheva-table th,
+      .sheva-table td {
+        border: 1px solid #ccc; /* katakchalar chiziqlari */
+        padding: 8px 12px;
+        text-align: left;
+      }
+
+      .sheva-table th {
+        background-color: #f5f5dc; /* ustun sarlavhalari rangi */
+      }
+
+      .sheva-table tr:nth-child(even) {
+        background-color: #fafafa; /* juft qatorlar rangi */
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>
+        Turk-Barloslar shevalari <br />
+        29.03.2026
+      </h1>
+    </header>
+
+    <div class="container">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <ul>
+          <li>
+            <a
+              href="#home"
+              onclick="
+                showSection('home');
+                return false;
+              "
+              >Turk-barlos shevalari</a
+            >
+          </li>
+          <li>
+            <a
+              href="#alifbo"
+              onclick="
+                showSection('alifbo');
+                return false;
+              "
+              >Alifbo</a
+            >
+          </li>
+          <li>
+            <a
+              href="#sozlar"
+              onclick="
+                showSection('sozlar');
+                return false;
+              "
+              >Sozlar jadvali</a
+            >
+          </li>
+          <li onclick="toggle('jadvalMenu')">Qiyosiy jadval</li>
+          <ul id="jadvalMenu" class="submenu">
+            <li onclick="showSection('j1')">
+              1. Devonu lug'otit turk bilan Andijon turk-barloslari shevasining
+              qiyosi
+            </li>
+            <li onclick="showSection('j2')">
+              2. Boshqa shevalarda uchramaydigan so'zlar
+            </li>
+            <li onclick="showSection('j3')">
+              3. Vodiy va vohda yashovchi turk-barlos shevalarining qiyosi
+            </li>
+            <li onclick="showSection('j4')">
+              4. Andijon, Buloqboshi va Aravon turk-barlos shevalarining qiyosi
+            </li>
+          </ul>
+
+          <li onclick="toggle('videoMenu')">Video materiallar</li>
+          <ul id="videoMenu" class="submenu">
+            <li onclick="showSection('f1')">
+              1. Qayerdan ko'chib kelganingiz va qaysi urug'ga mansub
+              ekanligingiz haqida bilasizmi?
+            </li>
+            <li onclick="showSection('f2')">
+              2. Turk-barloslarni boshqa urug' vakillaridan qanday ajratib
+              olasiz?
+            </li>
+            <li onclick="showSection('f3')">
+              3. Ajdodlaringiz qanday mehnat bilan shug'ullangan.
+            </li>
+          </ul>
+
+          <li onclick="toggle('axborotMenu')">Axborotchilar</li>
+          <ul id="axborotMenu" class="submenu">
+            <li onclick="showSection('ax1')">1. Marhamat tuman</li>
+            <li onclick="showSection('ax2')">2. Buloqboshi tuman</li>
+            <li onclick="showSection('ax3')">3. Aravon tuman</li>
+            <li onclick="showSection('ax_full')">To‘liq ro‘yxat</li>
+          </ul>
+          <li>
+            <a
+              href="#ertak"
+              onclick="
+                showSection('ertak');
+                return false;
+              "
+              >Ertak</a
+            >
+          </li>
+          <li>
+            <a
+              href="#topishmoq"
+              onclick="
+                showSection('topishmoq');
+                return false;
+              "
+              >Topishmoq</a
+            >
+          </li>
+          <li>
+            <a
+              href="#maqol"
+              onclick="
+                showSection('maqol');
+                return false;
+              "
+              >Maqol</a
+            >
+          </li>
+          <li onclick="toggle('qoshiqMenu')">Qo'shiqlar</li>
+          <ul id="qoshiqMenu" class="submenu">
+            <li onclick="showSection('q1')">1. Kelin salom</li>
+            <li onclick="showSection('q2')">2. Yor-yor</li>
+            <li onclick="showSection('q3')">3. Ona</li>
+          </ul>
+          <li>
+            <a
+              href="#audio"
+              onclick="
+                showSection('audio');
+                return false;
+              "
+              >Audio materiallar</a
+            >
+          </li>
+          <li>
+            <a
+              href="#contact"
+              onclick="
+                showSection('contact');
+                return false;
+              "
+              >Biz bilan aloqa</a
+            >
+          </li>
+        </ul>
+      </aside>
+
+      <!-- CONTENT -->
+      <main class="content">
+        <!-- TURK-BARLOS SHEVALARI -->
+        <div id="home" class="section">
+          <h2>Turk-barlos shevalari haqida</h2>
+
+          <div class="text-box">
+            <p>
+              Turkiy xalqlar qadimdan Markaziy Osiyo tarixida muhim o‘rin
+              tutgan. Ularning etnik tarkibi turli urug‘ va qabilalardan tashkil
+              topgan bo‘lib, har bir urug‘ o‘zini boshqa qabilalardan ajratish
+              maqsadida turk so‘ziga o‘z nomini qo‘shib aytgan. O‘rxun-Enasoy
+              bitiklarida turk so‘zi butun turkiy millatni ifodalagan.
+            </p>
+
+            <p>
+              O‘rta asrlarda turklar ko‘p sonli urug‘larga bo‘linganligi
+              sababli, qabila nomini turk so‘ziga qo‘shib aytish ularni
+              farqlashga xizmat qilgan. Shu tariqa “turk-barlos” atamasi
+              shakllangan degan ehtimoliy fikrlar mavjud. Bu atama etnik va
+              shajaraviy mansublikni bildirgan, ya’ni Barloslarning umumiy
+              turkiy ildizdan kelib chiqqanini tasdiqlagan. Shu bilan birga, u
+              siyosiy va ijtimoiy mavqeni ifodalagan, chunki Amir Temur davrida
+              Barloslar davlatning asosiy harbiy tayanchi edi.
+            </p>
+
+            <p>
+              Alisher Navoiy Husayn Boyqaro davrini tasvirlar ekan, taxt
+              marosimida qatnashgan elita qabilalar orasida “barlosiy nihod
+              ozodalar”ni alohida faxr bilan tilga oladi. Bu barloslarning XV
+              asr Xuroson siyosiy muhitidagi yuksak mavqeini ko‘rsatadi.
+            </p>
+
+            <p>
+              Turk-barlos atamasi o‘rta asrlardagi turklarning siyosiy va
+              shajaraviy ma’nolarning uyg‘unlashgan ko‘rinishidir. Turk so‘zi
+              qadimiy ildizlarga ega bo‘lib, butun turkiy millatni ifodalagan.
+            </p>
+
+            <p>
+              Mening tadqiqot obyektim Andijon viloyati Marhamat tumani
+              tarkibidagi Qorabog‘ish, Rohat, Ko‘mirchi, Kalelin, Ilich, Rovot,
+              Buloqboshi tumani tarkibiga kiruvchi Buloqboshi, Shirmonbuloq,
+              Nayman, Uchtepa, Sharq yulduzi, Chaqar, Qo‘rg‘oncha qishloqlari
+              hamda Qirg‘iziston hududiga kiruvchi Aravon tumani Chekobot,
+              Lenin, 8-Birgat, Boyto‘pi, To‘lqin, Oq Machit, Uchko‘prik,
+              Zelyoniy Most, 1-May kabi hududlarni o‘rganishni o‘z ichiga oladi.
+            </p>
+
+            <p>
+              Tadqiqot davomida ushbu hududlarda yashovchi aholining katta qismi
+              turk-barlos urug‘iga mansub ekanligi aniqlandi. Shu bilan birga,
+              bu hududlarda o‘zbeklar asosiy qatlamni tashkil etishi bilan bir
+              qatorda tojik, qirg‘iz, rus, tatar va koreys millatlariga mansub
+              aholi vakillari ham yashaydi. Bu xilma-xillik mintaqaning tarixiy
+              rivoji, tili va urf-odatlariga sezilarli ta’sir ko‘rsatgan.
+            </p>
+
+            <p>
+              Aholi vakillari o‘z urug‘ nomlarini yaxshi biladilar va ulardan
+              faxrlanadilar. Muloqot jarayonida sayyidlar, eshonlar,
+              qashqarilar, bekto‘pilar, oxunlar, turklar, turk-barloslar,
+              qipchoqlar kabi urug‘ nomlari orqali bir-birlarini
+              tanishtiradilar. Bir urug‘ vakillari o‘zaro yaqin aloqada bo‘lib,
+              ajdodlardan meros bo‘lib kelayotgan marosimlarni davom
+              ettiradilar.
+            </p>
+
+            <p>
+              Suhbatlar davomida ko‘plab yoshi ulug‘ insonlar o‘zlarini turk deb
+              bilishlarini va ajdodlari O‘ratepa hududidan kelib joylashganini
+              ta’kidlashdi. Ularning aksariyati o‘z kelib chiqishini turkiy
+              ildizlarga bog‘laydi, biroq barloslar haqida ma’lumotga ega
+              bo‘lganlar nisbatan kam.
+            </p>
+
+            <p>
+              Shuningdek, sheva xususiyatlari ham muhim dalil bo‘lib xizmat
+              qiladi. Masalan, ayrim hududlarda “otlar” va “itlar” so‘zlari
+              “oltar” va “iltar” shaklida ishlatilgan. Hozirgi kunda bu shakllar
+              deyarli qo‘llanilmaydi, biroq katta avlod vakillari buni eslab
+              o‘tadilar.
+            </p>
+
+            <p>
+              Tadqiqot davomida turk-barlos shevasining ayrim jihatlari
+              Shahrisabz shevasiga o‘xshashligi ham kuzatildi. Bu esa tarixiy va
+              etnik bog‘liqlik mavjudligini ko‘rsatadi.
+            </p>
+
+            <p>
+              Shuningdek, sovet davrida pasportlarda millatni “turk” deb
+              yozishga ruxsat berilmagani sababli ko‘pchilik o‘zini “o‘zbek” deb
+              yozdirishga majbur bo‘lgan. Hozirgi kunda esa ayrim hududlarda bu
+              nomni qayta tiklash imkoniyati mavjud.
+            </p>
+
+            <p>
+              Dala tadqiqotlari natijasida ayrim hududlardagi turk-barloslar
+              o‘zlarini faqat “turk” deb atashi ularning boshqa turkiy guruhlar
+              bilan qo‘shilib ketganligini ko‘rsatadi.
+            </p>
+
+            <p>
+              Ushbu shevani chuqur o‘rganish nafaqat o‘zbek tilining
+              rivojlanishini, balki mintaqaning etnografik va madaniy merosini
+              ham kengroq anglash imkonini beradi.
+            </p>
+          </div>
+        </div>
+
+        <!-- ALIFBO -->
+        <div id="alifbo" class="section">
+          <h2>Alifbo</h2>
+          <div class="alphabet-table-wrapper">
+            <table class="alphabet-table">
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>O‘zbek lotin alifbosi</th>
+                  <th>Yangi o‘zbek transkripsiyasi</th>
+                  <th>An’anaviy o‘zbek transkripsiyasi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>А а</td>
+                  <td>Аа (qattiq)<br />Ää (yumshoq)</td>
+                  <td>Аа (qattiq)<br />Əə (yumshoq)</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>B b</td>
+                  <td>B b</td>
+                  <td>Бб</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>D d</td>
+                  <td>D d</td>
+                  <td>Дд</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Е е</td>
+                  <td>Е е</td>
+                  <td>Ээ</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>F f</td>
+                  <td>F f</td>
+                  <td>Ff (lab-lab)<br />Фф (lab-tish)</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>G g</td>
+                  <td>G g</td>
+                  <td>Гг</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>H h</td>
+                  <td>H h</td>
+                  <td>Ҳҳ</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>I i</td>
+                  <td>I i (yumshoq)<br />Ïï (qattiq)</td>
+                  <td>
+                    И (yumshoq)<br />Ы (qattiq)<br />Ъ (и+ы)<br />Ь (ы qisqasi)
+                  </td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>J j</td>
+                  <td>Ǯǯ</td>
+                  <td>дж</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>K k</td>
+                  <td>K k</td>
+                  <td>Кк</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>L l</td>
+                  <td>L l</td>
+                  <td>Лл</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>M m</td>
+                  <td>M m</td>
+                  <td>Мм</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>N n</td>
+                  <td>N n</td>
+                  <td>Нн</td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td>О о</td>
+                  <td>Āā</td>
+                  <td>Оо</td>
+                </tr>
+                <tr>
+                  <td>15</td>
+                  <td>P p</td>
+                  <td>P p</td>
+                  <td>Пп</td>
+                </tr>
+                <tr>
+                  <td>16</td>
+                  <td>Q q</td>
+                  <td>Q q</td>
+                  <td>Ққ</td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td>R r</td>
+                  <td>R r</td>
+                  <td>Рр</td>
+                </tr>
+                <tr>
+                  <td>18</td>
+                  <td>S s</td>
+                  <td>S s</td>
+                  <td>Сс</td>
+                </tr>
+                <tr>
+                  <td>19</td>
+                  <td>T t</td>
+                  <td>T t</td>
+                  <td>Тт</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>U u</td>
+                  <td>Uu (qattiq)<br />Üü (yumshoq)</td>
+                  <td>У (qattiq)<br />Ү (yumshoq)</td>
+                </tr>
+                <tr>
+                  <td>21</td>
+                  <td>V v</td>
+                  <td>V v<br />Ww (lab-lab)</td>
+                  <td>Вв (lab-tish)</td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td>X x</td>
+                  <td>X x</td>
+                  <td>Хх</td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>Y y</td>
+                  <td>Jj</td>
+                  <td>Йй</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>Z z</td>
+                  <td>Z z</td>
+                  <td>Зз</td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td>Oʻ oʻ</td>
+                  <td>Oo (qattiq)<br />Öö (yumshoq)</td>
+                  <td>Oo (qattiq)<br />ƟƟ (yumshoq)</td>
+                </tr>
+                <tr>
+                  <td>26</td>
+                  <td>Gʻ gʻ</td>
+                  <td>γ</td>
+                  <td>Ғғ</td>
+                </tr>
+                <tr>
+                  <td>27</td>
+                  <td>Sh sh</td>
+                  <td>Šš</td>
+                  <td>Шш</td>
+                </tr>
+                <tr>
+                  <td>28</td>
+                  <td>Ch ch</td>
+                  <td>Čč</td>
+                  <td>Чч</td>
+                </tr>
+                <tr>
+                  <td>29</td>
+                  <td>ng</td>
+                  <td>ƞ</td>
+                  <td>ң</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SOZLAR JADVALI -->
+        <div id="sozlar" class="section">
+          <h2>Sozlar jadvali</h2>
+          <div class="sheva-table-wrapper">
+            <table class="sheva-table">
+              <thead>
+                <tr>
+                  <th>Andijon turk-barlos</th>
+                  <th>Adabiy tilda</th>
+                  <th>Transliteratsiya</th>
+                  <th>Misol</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>arvāq</td>
+                  <td>ozgʻin</td>
+                  <td>arvoq</td>
+                  <td>vāj bālamej narvaγligindan süjelӓriη sӓnӓlӓdi-jӓ.</td>
+                </tr>
+                <tr>
+                  <td>arγamčï\\ïrγïč</td>
+                  <td>sakrash uchun arqon</td>
+                  <td>arg‘amchi\\irg‘ich</td>
+                  <td>
+                    ïrγïčim rāssӓ üzünӓkӓn, sal-pal kesödïm<br />
+                    kӓltӓ boppāldï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>aγrïndï</td>
+                  <td>xohlamadi</td>
+                  <td>og‘rindi</td>
+                  <td>
+                    uηgӓ ӓϳtsӓm āγrïnïp qïldïda, öziη qïlovir, qïzïm.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>ajnej</td>
+                  <td>1. ko‘zgi \\ 2. deraza oynasi</td>
+                  <td>ayney</td>
+                  <td>ajnelärdï artïp poj qïzïm.</td>
+                </tr>
+                <tr>
+                  <td>ӓstijӓm</td>
+                  <td>aslo</td>
+                  <td>astiyam</td>
+                  <td>ӓstijӓm bārgidej ǯājmӓsӓkӓn, rāsa jolï uzaγӓkӓn.</td>
+                </tr>
+                <tr>
+                  <td>ӓǯӓpsӓndӓ</td>
+                  <td>taom turi</td>
+                  <td>ajapsanda</td>
+                  <td>
+                    <br />
+                    kečkӓ ӓǯӓpsӓndӓ qïnη, mehmanlar bügün<br />
+                    kepqāsa kerej.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>ӓǯrïq</td>
+                  <td>begona o‘t</td>
+                  <td>ajriq</td>
+                  <td>
+                    <br />
+                    hӓmmӓ ǯāϳnï ӓǯrïq bāsïb kettïptï, bār<br />
+                    ketmānnï āpčïq tāzӓlӓvālӓϳlïk.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>āntarïlïš</td>
+                  <td>aγdarilmoq, yiqilmoq</td>
+                  <td>ontarilish</td>
+                  <td>
+                    <br />
+                    külip-külip āntarïlïp čüssӓ boladïmï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>āqlïq</td>
+                  <td>udum turi</td>
+                  <td>oqliq</td>
+                  <td>
+                    <br />
+                    āqlïqqa ālasmi, šunnan ālïƞg, toj<br />
+                    qïljätkänlär.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>ātӓkördï</td>
+                  <td>udum turi</td>
+                  <td>otako‘rdi</td>
+                  <td>
+                    <br />
+                    ātäkördigӓ tilvizir āldïj ϳӓηƞgi üϳgӓ<br />
+                    čïqïssa išlätär.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>āxϳāγ</td>
+                  <td>paxta yog‘i</td>
+                  <td>oxyog‘</td>
+                  <td>vāϳ süjüγ o:qatkä āxϳāγ išlӓtmen, sarϳāγ sālin.</td>
+                </tr>
+                <tr>
+                  <td>āxläš</td>
+                  <td>sakrash</td>
+                  <td>āxlash</td>
+                  <td>arïγdï āxläp ot.</td>
+                </tr>
+                <tr>
+                  <td>āϳbaldaq</td>
+                  <td>doira shaklidagi zirak</td>
+                  <td>oybaldoq</td>
+                  <td>
+                    <br />
+                    āϳbaldaγlaris čüšüppāsin, minčӓ čirejlijj,<br />
+                    kim äberdi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>bäbäčäq</td>
+                  <td>yangi tug‘ilgan qo‘yning bolasi</td>
+                  <td>babachaq</td>
+                  <td>bāqqa hajda bäbäčäγlardï.</td>
+                </tr>
+                <tr>
+                  <td>bӓrgej</td>
+                  <td>to‘gnog‘ich (broshka)</td>
+                  <td>bargej</td>
+                  <td>
+                    <br />
+                    bïzi paϳïtta kelinlӓr hӓr-xïl bӓrgeϳlӓrtӓn,<br />
+                    köϳlelӓrdi čekkӓsigӓ taxvālardij.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>baxšï</td>
+                  <td>bashoratchi, davolovchi</td>
+                  <td>baxshi</td>
+                  <td>
+                    <br />
+                    baxšï, joqalgän tïllamï ǯājïnï äjttï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>baldaγ</td>
+                  <td>zirak turi</td>
+                  <td>baldag‘</td>
+                  <td>ovsinizi toϳda kördim tïlla baldaγ taqvāpti.</td>
+                </tr>
+                <tr>
+                  <td>bant beriš</td>
+                  <td>poliz ekini pishib bandidan uzilishi</td>
+                  <td>bant berish</td>
+                  <td>
+                    <br />
+                    dalani ortasida bittӓ tarvus bant beripti, bāϳa körödïm.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>bālïš</td>
+                  <td>yostiq</td>
+                  <td>bolish</td>
+                  <td>
+                    <br />
+                    pär bālïšlarïmï hämmäsini sintipon bālïškӓ<br />
+                    älmäštïrdïm.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>bop qojïš\\ bolïngän</td>
+                  <td>unashtirmoq</td>
+                  <td>bo‘p qo‘yish\\bo‘lingan</td>
+                  <td>
+                    <br />
+                    nilüfӓrdi kelin qïmāxčijdij, bopqoϳïšïptï bilmeϳ qāppïs.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>botana</td>
+                  <td>loyqa suv</td>
+                  <td>bo‘tana</td>
+                  <td>
+                    <br />
+                    botana bosajam paqïrlarda süv apkïrïp<br />
+                    poj, ettälӓpkӓčӓ tïnïp pāladï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>butïrïš</td>
+                  <td>tugallash</td>
+                  <td>butirish</td>
+                  <td>köjlegim buttïmï?</td>
+                </tr>
+                <tr>
+                  <td>čaγïr</td>
+                  <td>oq va qora arlashgan rang</td>
+                  <td>chag‘ir</td>
+                  <td>otïndï täjïdä čaγïr ilān jātïpti.</td>
+                </tr>
+                <tr>
+                  <td>čaqčaqa\\ čӓk – čӓk</td>
+                  <td>chakchaki</td>
+                  <td>chaqchaqa\\chak-chak</td>
+                  <td>
+                    <br />
+                    hӓjitkӓ čaqčaqa qïlamis, ӓsӓl āpčïq qïzïm.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>čäč</td>
+                  <td>soch</td>
+                  <td>chach</td>
+                  <td>čäčijnï tärävāl.</td>
+                </tr>
+                <tr>
+                  <td>čākmāšinä</td>
+                  <td>tikuv mashinasi</td>
+                  <td>chokmoshina</td>
+                  <td>
+                    <br />
+                    čākmāšinezi berïp türiƞ qošni, zebaxāndi<br />
+                    tošelärini tikvālej.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>čirmӓndӓ\\ čildirmӓ</td>
+                  <td>doira(cholg‘u asbobi)</td>
+                  <td>chirmanda\\childirma</td>
+                  <td>ilgärï čirmändä čālïp jār-jār äjtišärdï</td>
+                </tr>
+                <tr>
+                  <td>čilāpčin</td>
+                  <td>qo‘l yuvganda suv tushadigan idish</td>
+                  <td>chilopchin</td>
+                  <td>
+                    <br />
+                    mehmānlar kelišïgä čovgin bïlan čilāpčindï<br />
+                    āp qoj.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>čilgi</td>
+                  <td>ertapishar meva</td>
+                  <td>chilgi</td>
+                  <td>
+                    <br />
+                    toviγlargä semirsin dïp, čilgi mӓkkӓdӓn köp berämis.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>čiläš</td>
+                  <td>suyuq massaga tekkizib olish</td>
+                  <td>chilash</td>
+                  <td>
+                    <br />
+                    kün ïsïp ketödi ӓkӓm köjlejïnï krӓndeji<br />
+                    suvgӓ čilӓvāldi<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>čilixläš</td>
+                  <td>shalabbo bo‘lish</td>
+                  <td>chilixlash</td>
+                  <td>jāmγïrdä čilixlap pāldij</td>
+                </tr>
+                <tr>
+                  <td>čimčiläγič</td>
+                  <td>chumolisimon chaquvchi xasharot</td>
+                  <td>chimchilag‘ich</td>
+                  <td>čimčiläγič qolïmï jāmān čäxti.</td>
+                </tr>
+                <tr>
+                  <td>čïlpïš</td>
+                  <td>ustki qismini uzib olish</td>
+                  <td>čilpish</td>
+                  <td>
+                    <br />
+                    xālam hamïrdï čïlpïp-čïlpïp nān jasadi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>čïm tāmāq</td>
+                  <td>chimxo‘r</td>
+                  <td>chim tomoq</td>
+                  <td>
+                    <br />
+                    sӓntälät hāla kӓsӓl bogӓndӓn kijin, čïm<br />
+                    tāmāq bopqāgӓn.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>čöγal</td>
+                  <td>urishqoq, qo‘pol</td>
+                  <td>cho‘g‘al</td>
+                  <td>buni hämmä ortäγläri čöγal-ej.</td>
+                </tr>
+                <tr>
+                  <td>čükrӓntoj</td>
+                  <td>sunnat toʻy</td>
+                  <td>chukranto‘y</td>
+                  <td>
+                    <br />
+                    čükrӓntoϳda mazza qïp nïšālda, āš, šorva<br />
+                    ϳedij(bolalar tili)<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>čüviš</td>
+                  <td>titmoq</td>
+                  <td>chuvish</td>
+                  <td>ipti čüvïp tӓšӓdinkü qoj ǯājïgä.</td>
+                </tr>
+                <tr>
+                  <td>četӓnburma</td>
+                  <td>ayyollar libos turi</td>
+                  <td>chetanburma</td>
+                  <td>sepimdä četänburma köjlegim bolardï.</td>
+                </tr>
+                <tr>
+                  <td>danγalčä</td>
+                  <td>sirli idish</td>
+                  <td>dang‘alcha</td>
+                  <td>danγalčägä oqat qüjvāl</td>
+                </tr>
+                <tr>
+                  <td>dahagӓ</td>
+                  <td>
+                    <br />
+                    pilla qurtini oxirgi uyquga ketish jarayoni<br />
+                  </td>
+                  <td>dahaga</td>
+                  <td>
+                    <br />
+                    dahagӓ qurt bāqqammis, pïllä tergӓmmis,<br />
+                    otin täšigӓmis köp menӓt qïgӓmmis.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>dïnγïrdak</td>
+                  <td>tetik, sog‘lom</td>
+                  <td>ding‘irdak</td>
+                  <td>
+                    <br />
+                    hāvātir āmen ammam dïnγïrdej, jügürüb<br />
+                    jüripti<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>dumbïl</td>
+                  <td>pishirilgan makkajo‘xori</td>
+                  <td>dumbil</td>
+                  <td>
+                    <br />
+                    bārïϳlӓr bāllӓrïm bāγdӓn dumbïl terïb<br />
+                    kelïϳlӓr pïšïrïb berӓmӓn.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>düsӓmbӓ</td>
+                  <td>me’yoridan ortiq ustma-ust qo‘yish</td>
+                  <td>dusamba</td>
+                  <td>
+                    <br />
+                    mïnčӓ düsӓbӓ qïlïb āpkeldïη tӓšӓ, belïη<br />
+                    ārïpālӓdï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>dolābï</td>
+                  <td>sifatsiz meva yoki sabzavot</td>
+                  <td>do‘lobi</td>
+                  <td>sātïškä dolābi sözilardi sāma.</td>
+                </tr>
+                <tr>
+                  <td>döltä</td>
+                  <td>saryog‘ quyqasi</td>
+                  <td>do‘lta</td>
+                  <td>ettӓlӓp čājgӓ döltӓ bār.</td>
+                </tr>
+                <tr>
+                  <td>erčïš</td>
+                  <td>ergashish</td>
+                  <td>erchish</td>
+                  <td>
+                    <br />
+                    men üjdän čiqjatkänimi nevärälӓrim körsӓ<br />
+                    erčïjdï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>ešmä</td>
+                  <td>tannoz</td>
+                  <td>eshma</td>
+                  <td>
+                    <br />
+                    rӓsl ӓkӓni qïzïnï kördïm, ešïlïp töϳgӓ<br />
+                    ketϳӓtkӓnӓkӓn.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>gäǯïr</td>
+                  <td>qaysar, o‘jar</td>
+                  <td>gajir</td>
+                  <td>minčӓ gӓǯïrsӓn, āl digӓndӓ, ālövrsenči.</td>
+                </tr>
+                <tr>
+                  <td>giǯmӓn</td>
+                  <td>taom nomi</td>
+                  <td>gijman</td>
+                  <td>issïγ nānnan āpke gijmӓn qïlamis.</td>
+                </tr>
+                <tr>
+                  <td>gopi</td>
+                  <td>qurt pilla oʻraganda ikki qurt bir uyaga kirib olishi</td>
+                  <td>go‘pi</td>
+                  <td>pïllӓnï gopïlӓrïnï ӓlāhïdӓ qïlïjlӓr.</td>
+                </tr>
+                <tr>
+                  <td>γanaš</td>
+                  <td>bargsiz novda</td>
+                  <td>g‘anash</td>
+                  <td>qurtlardï γanap čïq.</td>
+                </tr>
+                <tr>
+                  <td>γӓϳnālï\\</td>
+                  <td>olxo‘ri</td>
+                  <td>g‘aynoli\\</td>
+                  <td>
+                    <br />
+                    enӓmi bāγida γaϳnālïsï bār, dājim terïp ϳiϳmis.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>köksültān</td>
+                  <td>ko‘ksulton</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>halïnčälek\\hančälek</td>
+                  <td>halunchak</td>
+                  <td>halinchalek\\hanchalaek</td>
+                  <td>hänchälej jäsäberiƞ ükäm mlan üčämïs</td>
+                </tr>
+                <tr>
+                  <td>hӓlpišlä</td>
+                  <td>shoshilish</td>
+                  <td>halpishla</td>
+                  <td>hӓlpišlӓp qaqa ketϳӓpsӓn.</td>
+                </tr>
+                <tr>
+                  <td>hülvä</td>
+                  <td>yalpizning turi</td>
+                  <td>hulva</td>
+                  <td>
+                    <br />
+                    bār qïzïm, zovïrdi(katta
+                    ariq)&amp;nbsp;&amp;nbsp;&amp;nbsp;boϳideji<br />
+                    hulvadӓn bir pelӓ(payola) terip ke, o:qatkä qošamis.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>istӓš</td>
+                  <td>izlash</td>
+                  <td>istash</td>
+                  <td>
+                    <br />
+                    eϳ hӓmmӓ ǯāϳdï istӓp tāpalmadïm, qaqa<br />
+                    ϳoqaldiϳkin-e.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>järmä</td>
+                  <td>
+                    1. ayollar sochini ikki bo‘lib o‘rib olganda soch
+                    o‘rtasidagi farq.<br />
+                    2. bug‘doydan tayyorlangan sutli taom<br />
+                    <br />
+                    <br />
+                  </td>
+                  <td>yarma</td>
+                  <td>
+                    <br />
+                    taraγ āpke järmä āčïp čäčijni orïp pojaman.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>jātqїzïš</td>
+                  <td>bolalarni sunnat qilish</td>
+                  <td>yotqizish</td>
+                  <td>
+                    <br />
+                    ükӓmi ϳātqïzdïj endi bemalal xoras sojsa<br />
+                    boladi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>jäkändāz\\töše</td>
+                  <td>ko‘rpacha</td>
+                  <td>yakandoz\\to‘she</td>
+                  <td>
+                    <br />
+                    bïzdä ϳäkändāzdi uč metr qïp tikӓdi, tāškendä tor metr<br />
+                    qïp tikädikän.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>jāviš</td>
+                  <td>non yopish</td>
+                  <td>yovish</td>
+                  <td>
+                    <br />
+                    tandirgӓ nān ϳāvgӓmmisis hidi kelϳӓpti<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>joqlov</td>
+                  <td>tashrif buyurish</td>
+                  <td>yo‘qlov</td>
+                  <td>
+                    <br />
+                    ǯïǯïnï(chaqaloq) ϳoqlap kiripöjelij<br />
+                    čïllasi čïqïptï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>jüzāštï</td>
+                  <td>udum turi</td>
+                  <td>yuzoshti</td>
+                  <td>jüzāštïgӓ kemӓdis, tinčlijmi.</td>
+                </tr>
+                <tr>
+                  <td>käsirmāč</td>
+                  <td>
+                    <br />
+                    tandirda yopishib qolgan nonning orqa qismi<br />
+                  </td>
+                  <td>kasirmoch</td>
+                  <td>
+                    <br />
+                    apa tandïrdan nāndï käsirmāčini āberiƞ<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>kävärteϳ</td>
+                  <td>tok osh</td>
+                  <td>kavartey</td>
+                  <td>
+                    <br />
+                    har jïl üzümdi bӓkidӓn qïškӓ ϳāpïp qoϳaman,<br />
+                    bāllarim kӓvӓrtej ϳӓxši körӓdi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>kӓlliglӓš</td>
+                  <td>kallaklash</td>
+                  <td>kalliglash</td>
+                  <td>
+                    <br />
+                    tutlardï kӓlliglӓp, tut šāxlarïnï qürtka(<br />
+                    pilla qurti) salamïz.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>kälpätir</td>
+                  <td>non turi</td>
+                  <td>kalpatir</td>
+                  <td>
+                    <br />
+                    sujuγ o:qat qïlϳatu:dïm, dӓrröv kӓlpӓtirӓm<br />
+                    qïvareϳ bāllar ϳaxši körïp ϳiϳdi<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>kӓmzïr\\kӓmzïl</td>
+                  <td>nimcha</td>
+                  <td>kamzir\\kamzil</td>
+                  <td>
+                    <br />
+                    qāra bahmaldan tikibergӓn kӓmzïlijzi<br />
+                    hӓlijäm kijjäppän.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>käzänotïj</td>
+                  <td>rezina etik</td>
+                  <td>kazano‘tiy</td>
+                  <td>
+                    <br />
+                    käzänotigimi äpkeči, ettӓlӓp bāqqa suv<br />
+                    qoϳodim, bir čiqip<br />
+                    suvdan xavar āp kelejčij.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>kepӓtӓ</td>
+                  <td>tashqi ko‘rinish (salbiy ma’noda)</td>
+                  <td>kepata</td>
+                  <td>
+                    <br />
+                    bar kepӓteϳni tuzӓt, öziηgӓ ϳӓrӓšӓdigӓn<br />
+                    išti qïseηči<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>keskänāš</td>
+                  <td>taom</td>
+                  <td>keskanosh</td>
+                  <td>kelinimgӓ keskӓnāš qïlïštï örgӓttim.</td>
+                </tr>
+                <tr>
+                  <td>kömäriš</td>
+                  <td>to‘nkarish</td>
+                  <td>ko‘marish</td>
+                  <td>
+                    <br />
+                    köčadӓn tāšbӓqӓ tāffaludïm, qāčïp ketmӓsin<br />
+                    dïp üϳgӓ äpkirip, üstigӓ ǯāmčanï kömӓrïp<br />
+                    qoϳsӓmӓm bӓribir qāčïketipti.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>körpӓqovdï</td>
+                  <td>udum turi</td>
+                  <td>ko‘rpaqo‘vdi</td>
+                  <td>
+                    <br />
+                    mädi:näni körpäqovdïsïda pičä paxta ϳetmeϳ qālodï,
+                    bāzargӓ<br />
+                    tušïp keldïj.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>kösej</td>
+                  <td>paxtaning g‘unchasi</td>
+                  <td>ko‘sey</td>
+                  <td>äjä mālgӓ beriškä kösej terïp keldij</td>
+                </tr>
+                <tr>
+                  <td>köstikān\\temïrtikān</td>
+                  <td>tikonli begona o‘t</td>
+                  <td>ko‘stikon\\temirtikon</td>
+                  <td>
+                    <br />
+                    kös tejmӓsin dïp, ešijtӓn kiroriškӓ<br />
+                    kösttikān āsïp pojdij.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>küvӓ</td>
+                  <td>
+                    <br />
+                    sutdan qaymoq ajratuvchi slindir shaklidagi<br />
+                    tunika asbob<br />
+                  </td>
+                  <td>kuva</td>
+                  <td>
+                    <br />
+                    sütti küvӓ qïlodïm ӓnčӓginӓ sarjāγ čixtï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>lapaγ</td>
+                  <td>semiz</td>
+                  <td>lapag‘</td>
+                  <td>lapaγlanïp bir iškӓ jӓrӓmej qāptï.</td>
+                </tr>
+                <tr>
+                  <td>lӓpӓčӓk\\lepӓr</td>
+                  <td>bolalar o‘yini</td>
+                  <td>lapachak\\lepar</td>
+                  <td>mahallada röšӓn eng zor läpäčej tepӓdi.</td>
+                </tr>
+                <tr>
+                  <td>lāčïra</td>
+                  <td>non turi</td>
+                  <td>lochira</td>
+                  <td>lāčïragä pïjāz bïlӓn jïzzӓ sāvārdïm.</td>
+                </tr>
+                <tr>
+                  <td>loγït</td>
+                  <td>lahm go‘sht</td>
+                  <td>lo‘g‘it</td>
+                  <td>göšti loγït ǯājïdan āldïm.</td>
+                </tr>
+                <tr>
+                  <td>lüq</td>
+                  <td>o‘simlikda kechadigan jarayon</td>
+                  <td>luq</td>
+                  <td>ekkän güllärïm lüq bop bak jāzdï.</td>
+                </tr>
+                <tr>
+                  <td>mӓskӓϳāγ</td>
+                  <td>kuvadan olingan yog‘</td>
+                  <td>maskayog‘</td>
+                  <td>
+                    <br />
+                    hāzir qajmaγ, sarjāγ išlӓtӓmis, ilgärï<br />
+                    küvӓdä mӓskӓjāγ ālārdij.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>mӓzӓr</td>
+                  <td>qudalarni oldi berdilari</td>
+                  <td>mazar</td>
+                  <td>
+                    <br />
+                    mӓzӓr ǯönätϳätkӓnïmïstӓ keseƞ qarašvarasan.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>mäǯik</td>
+                  <td>pakana</td>
+                  <td>majik</td>
+                  <td>
+                    <br />
+                    jäxši ϳe, mӓǯij bopālasan, boϳïnam ösmejdi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>märdej</td>
+                  <td>doni olingan makkajo‘xori, so‘ta</td>
+                  <td>mardey</td>
+                  <td>märdejlardi āpke očaqqa išlatamïs.</td>
+                </tr>
+                <tr>
+                  <td>mӓ:lim</td>
+                  <td>o‘qituvchi</td>
+                  <td>ma’lim</td>
+                  <td>
+                    <br />
+                    sӓttārdi oγlï bāllärgӓ<br />
+                    mӓ:limliϳ qïlϳäptikӓn.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>miǯiläš</td>
+                  <td>ezgʻiladi</td>
+                  <td>mijilash</td>
+                  <td>
+                    <br />
+                    nāndï xamïrïnï qanča köp miǯilaseƞ, nanïƞ<br />
+                    šunčä šïrïn boladï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>muγdašïš</td>
+                  <td>dildan suhbatlashish</td>
+                  <td>mug‘dashish</td>
+                  <td>
+                    <br />
+                    dügӓnӓm mӓn taηgäčä muγdašïp otïrdij. rāsa<br />
+                    gӓplӓrïmïz jïγïlgӓn äkӓn.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>mölčӓq\\mölčaγ</td>
+                  <td>munchoq</td>
+                  <td>mo‘lchaq\\mo‘lchag‘</td>
+                  <td>
+                    <br />
+                    jӓƞgi kelinligimdä qïzïl, āq mölčäγïmiz bolardi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>nӓkӓs</td>
+                  <td>qizgʻanchiq</td>
+                  <td>nakas</td>
+                  <td>
+                    <br />
+                    nӓkӓs ӓkӓnsӓn, seminän oϳnamïman, bittӓϳäm ončaγïjnï<br />
+                    bermädiƞ(bolalar tili).<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>nāmbaraγ</td>
+                  <td>taom turi</td>
+                  <td>nombarag‘</td>
+                  <td>
+                    <br />
+                    qajnam suttï jāγïnï toplap nāmbaraγ qïladi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>nānsïndïrdï</td>
+                  <td>udum turi</td>
+                  <td>nonsindirdi</td>
+                  <td>
+                    <br />
+                    qündüzāpӓ qïzïnï boptï šüngӓ bügün<br />
+                    nānsïndïrdïjkän..<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>nes</td>
+                  <td>hayron qolmoq</td>
+                  <td>nes</td>
+                  <td>ātasïnï gäpini eštip nes bopāldi.</td>
+                </tr>
+                <tr>
+                  <td>opkä</td>
+                  <td>maxsus taom</td>
+                  <td>o‘pka</td>
+                  <td>dädäsi opkägä jāγlij sut āliƞg.</td>
+                </tr>
+                <tr>
+                  <td>oγnaš</td>
+                  <td>to‘gʻirlash, tuzatish</td>
+                  <td>o‘g‘nash</td>
+                  <td>
+                    <br />
+                    sepӓrӓtïr sut bilӓn<br />
+                    qӓϳmӓγdi ӓrӓlӓštirϳӓptï, oγna beriη.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>parï\\lӓnkӓ</td>
+                  <td>bolalar o‘yini</td>
+                  <td>pari\\lanka</td>
+                  <td>
+                    <br />
+                    mahallada müxabat en zör parï tepӓdï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>pïlampājӓ</td>
+                  <td>zinapoya</td>
+                  <td>pilampoya</td>
+                  <td>
+                    <br />
+                    mäjtäptä rāssa pïlampāϳa köpäkӓn, ϳïqïlïp<br />
+                    čüšmäsin dïp ükӓmi qolïdan üšӓp ϳurdïm.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>pešdӓsxān</td>
+                  <td>
+                    <br />
+                    mehmonlarga non va shirinliklardan solib<br />
+                    berish<br />
+                  </td>
+                  <td>peshdasxon</td>
+                  <td>
+                    <br />
+                    bolïƞ, pešdӓsxān äpkirdizmi, ānez āpkegän<br />
+                    pïšïrïγla:danam sālin.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>pütӓš</td>
+                  <td>
+                    <br />
+                    daraxt shoxlarini kesish, tartibga<br />
+                    keltirish<br />
+                  </td>
+                  <td>putash</td>
+                  <td>
+                    <br />
+                    bügün kečkӓčӓ bāγdejï šaptalïlardï<br />
+                    pütädim-da.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>postïrma</td>
+                  <td>
+                    <br />
+                    go‘shti va teri orasidagi shilimshiq qatlam<br />
+                  </td>
+                  <td>po‘stirma</td>
+                  <td>enäm dajim āškä postïrmali göš sāladi.</td>
+                </tr>
+                <tr>
+                  <td>qaqaš</td>
+                  <td>tiqilib qolmoq(suyuqlikka)</td>
+                  <td>qaqash</td>
+                  <td>qaqap ketti suv ber ötïp ketӓdi.</td>
+                </tr>
+                <tr>
+                  <td>qaqïrmačej</td>
+                  <td>qirmoch</td>
+                  <td>qaqirmachey</td>
+                  <td>
+                    <br />
+                    qaqïrmačejini bāšqa idiškӓ saldïm, kimi<br />
+                    ϳegisi kesa āpkeberӓmӓn.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>qarïšqï</td>
+                  <td>chiϳaboʻri</td>
+                  <td>qarishqi</td>
+                  <td>
+                    <br />
+                    qoϳxānani ešigini ϳäxšilap ϳāp, kečӓsi<br />
+                    qarïšqï kemäsin.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>qančačalāq</td>
+                  <td>tetepoyalik tadbiri</td>
+                  <td>qanchachaloq</td>
+                  <td>
+                    <br />
+                    qančačalāq qïlamïs, bār, jāš ballardï<br />
+                    čaqïrïp ke.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>qantegörij</td>
+                  <td>o‘rik turi</td>
+                  <td>qantego‘riy</td>
+                  <td>qantegörijtӓn qāqi sāldij</td>
+                </tr>
+                <tr>
+                  <td>qapaq sāmsa</td>
+                  <td>somsaning bir turi</td>
+                  <td>qapaq somsa</td>
+                  <td>
+                    <br />
+                    qapaq sāmsadan ikitӓ jeüvdïm, küni mlan tox<br />
+                    jürdim.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>qaϳšiāš</td>
+                  <td>xamirli ovqat</td>
+                  <td>qayshiosh</td>
+                  <td>
+                    <br />
+                    äpäm qïgän qajšiāšti tamï xalïjam esimdӓ.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>qa:da</td>
+                  <td>udum turi</td>
+                  <td>qada</td>
+                  <td>
+                    <br />
+                    kӓrimӓxān ānasigӓ qa:da qïljaptijkän ӓbettä<br />
+                    čïqïp kelӓmis.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>qïltïrïq</td>
+                  <td>
+                    1. baliq qiltanog‘i<br />
+                    2. ozg‘in.
+                  </td>
+                  <td>qiltiriq</td>
+                  <td>sijnim qïltïrïq mengä oxšap töläčämäs.</td>
+                </tr>
+                <tr>
+                  <td>qurtāp</td>
+                  <td>qurut</td>
+                  <td>qurtop</td>
+                  <td>
+                    <br />
+                    jāzda qurtāp qïp tāmga ϳāϳsej zör bop<br />
+                    qurïϳdï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>qurtava</td>
+                  <td>ezilgan qurt</td>
+                  <td>qurtava</td>
+                  <td>
+                    <br />
+                    jāzdï künida, qurtava ičseη ǯāndï<br />
+                    rāhatï-da.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>sӓkӓlӓk\\öxlö</td>
+                  <td>juva</td>
+                  <td>sakalak\\o‘xlo‘</td>
+                  <td>
+                    <br />
+                    xamïrgӓ sӓkӓlejdi qattïγ bāsma, ϳāpïšïp pāladi<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>sӓbӓčkӓgül</td>
+                  <td>gul nomi</td>
+                  <td>sabachkagul</td>
+                  <td>
+                    <br />
+                    ӓgӓrötgӓ hӓr-xïl sӓbӓčkägüldän ekӓndïm,<br />
+                    qïšgӓčӓ türdï.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>sӓjiš</td>
+                  <td>sanchmoq</td>
+                  <td>sayish</td>
+                  <td>
+                    <br />
+                    turγun māma kinnӓ silӓgӓn pïčaγïnï jergӓ<br />
+                    sӓjip pojdi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>sāqït</td>
+                  <td>taom</td>
+                  <td>sāqit</td>
+                  <td>sāqïttï xamïrïnï qïlïškä ӓmmӓm duvā āgän.</td>
+                </tr>
+                <tr>
+                  <td>sijdäm</td>
+                  <td>silliq mato</td>
+                  <td>siydam</td>
+                  <td>
+                    <br />
+                    kelinligimta sijdäm köjlelarim bolardi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>sürpaāšti</td>
+                  <td>udum turi</td>
+                  <td>surpaoshti</td>
+                  <td>
+                    <br />
+                    qïzïmï bergänimta, sürpäāštïda äpäm hämmägӓ<br />
+                    fӓrtuj tïkïp kelö:di.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>sultap</td>
+                  <td>sutli taomlardan biri</td>
+                  <td>sultap</td>
+                  <td>
+                    <br />
+                    ettäläpläri apam sultap qiberärdi, kuni<br />
+                    mlan toq jurärdij.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>sutartïš</td>
+                  <td>sutni qaymog‘idan ajratish</td>
+                  <td>sutartish</td>
+                  <td>
+                    <br />
+                    men sutartïp keleϳ, ükӓlӓriƞgӓ qarap tur<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>süqiš</td>
+                  <td>tiqish</td>
+                  <td>suqish</td>
+                  <td>
+                    <br />
+                    köčӓtlӓrgӓ tӓϳӓq suqïp bӓϳlӓp poϳseƞ<br />
+                    ϳïqïlïp tüšmejdi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>sozma</td>
+                  <td>chalpak</td>
+                  <td>so‘zma</td>
+                  <td>
+                    <br />
+                    bajramlada sozma qïp jaš bāllargӓ<br />
+                    tarqatamïs<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>sövingül</td>
+                  <td>yovvoyi o‘t</td>
+                  <td>so‘vingul</td>
+                  <td>
+                    <br />
+                    sövingüldi bӓgidӓn ālïp, qolïnƞgӓ suv<br />
+                    bïlan išqalasen rāssa köpirӓdi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>sözӓšti</td>
+                  <td>sabzi to‘g‘rar</td>
+                  <td>so‘zashti</td>
+                  <td>
+                    <br />
+                    äjäsi, šarxān pïčaγïmï āberiƞ sözӓštigä<br />
+                    ketjappan.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>sözäjnek</td>
+                  <td>ninachi</td>
+                  <td>so‘zaynek</td>
+                  <td>äriγdi bojidan sözäjnej ušavāldij.</td>
+                </tr>
+                <tr>
+                  <td>spärej orij</td>
+                  <td>o‘rik turi</td>
+                  <td>sparey o‘riy</td>
+                  <td>
+                    <br />
+                    späre orijdan terïp ket bālam, qiϳām<br />
+                    qivālasan.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>šäläγorij</td>
+                  <td>o‘rik turi</td>
+                  <td>shalag‘o‘riy</td>
+                  <td>
+                    <br />
+                    šäläγorijdan qāqi qïma, ϳäxši bomeϳdi,<br />
+                    qurigӓntӓ posti qāladi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>šӓmej</td>
+                  <td>begona o‘t</td>
+                  <td>shamey</td>
+                  <td>
+                    <br />
+                    pamildārini ārasini šӓmeϳ bāsïp ketïptï<br />
+                    kečӓ suv qoϳodim, bügün tāzalavāldïm.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>šӓtir</td>
+                  <td>birdan</td>
+                  <td>shatir</td>
+                  <td>
+                    <br />
+                    vāj, sӓl šāšma, minčӓ šatïr-šutïr qilasan.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>šildiηläš</td>
+                  <td>yupun kiyinish</td>
+                  <td>shildinglash</td>
+                  <td>üstiηgӓ binnӓsӓ kiϳ šildiηlӓmӓstӓn.</td>
+                </tr>
+                <tr>
+                  <td>šimӓdӓlӓš</td>
+                  <td>shimarmoq</td>
+                  <td>shimadalash</td>
+                  <td>šïmïnï šimädälap lāϳ tepϳaptï.</td>
+                </tr>
+                <tr>
+                  <td>tarvāq</td>
+                  <td>eshakemi</td>
+                  <td>tarvoq</td>
+                  <td>sovïqqa čiqödim, tarvāq tāšïp ketti.</td>
+                </tr>
+                <tr>
+                  <td>tamšanïš</td>
+                  <td>chaynash, ovqatlanish</td>
+                  <td>tamshanish</td>
+                  <td>tamšanïb otïrïppan.</td>
+                </tr>
+                <tr>
+                  <td>tājtāj</td>
+                  <td>tetapoya</td>
+                  <td>toy-toy</td>
+                  <td>
+                    <br />
+                    qani tāϳtāϳ-tāϳtāϳ ӓnӓ kӓttӓ bāla bopsiz,<br />
+                    endi qaqačačalaq qïlamïz-ӓ o:lïm.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>täräxläš</td>
+                  <td>epchil</td>
+                  <td>taraxlash</td>
+                  <td>
+                    <br />
+                    kelïnïm täräxlägän. ā:zïnï ačïp otïrmejdi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>tālgül</td>
+                  <td>xonaki gul</td>
+                  <td>tolgul</td>
+                  <td>
+                    <br />
+                    tālgüldi quϳāškӓ qoϳsam püšti güli āqarïp<br />
+                    ketipti.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>tek</td>
+                  <td>jim</td>
+                  <td>tek</td>
+                  <td>tek, dӓdeη uxlaϳaptï, oϳγatvārasan.</td>
+                </tr>
+                <tr>
+                  <td>teq qoj</td>
+                  <td>aralashma, tegma</td>
+                  <td>teq qo‘y</td>
+                  <td>
+                    <br />
+                    tek qoj, ӓrӓlӓšmӓ bӓribir bilgӓnini qiladi.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>teηgtüš</td>
+                  <td>tengdosh</td>
+                  <td>tengtush</td>
+                  <td>
+                    <br />
+                    baϳegi qïz sem bilӓn<br />
+                    teηtüšmi, epčilgineϳkӓn.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>tupaāš</td>
+                  <td>hamirli suyuq taom</td>
+                  <td>tupaosh</td>
+                  <td>tupaašti xamïrïnï jüpqa jājiš kerej.</td>
+                </tr>
+                <tr>
+                  <td>torpaq</td>
+                  <td>buzoqcha</td>
+                  <td>to‘rpaq</td>
+                  <td>
+                    <br />
+                    torpaqqa qarap tur, üzäqqa ketip qāmasin.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>toptāš</td>
+                  <td>qizlar oʻyini</td>
+                  <td>to‘ptosh</td>
+                  <td>hāzïrgi bāllar toptāš oϳnäšti bïlmejdi.</td>
+                </tr>
+                <tr>
+                  <td>usvariš</td>
+                  <td>suzong‘ich</td>
+                  <td>usvorish</td>
+                  <td>māldi jānigӓ bārma usvarmasïn.</td>
+                </tr>
+                <tr>
+                  <td>učï</td>
+                  <td>udum turi</td>
+                  <td>uchi</td>
+                  <td>
+                    <br />
+                    sābïrdï ānasïnï učijkän, etӓlӓpttӓ otïp<br />
+                    poϳejlij üϳӓt bomasïn täγïn.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>uzïqāra</td>
+                  <td>urishqoq</td>
+                  <td>uziqora</td>
+                  <td>
+                    <br />
+                    ӓkmӓldi ö:γlï rāssӓ uzïqāra boptï, köčӓdӓn ötkäƞƞä tāš<br />
+                    ātjapti.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>xunān\\örӓmӓ</td>
+                  <td>xonim</td>
+                  <td>xunon\\o‘rama</td>
+                  <td>
+                    <br />
+                    xunāngӓ qaϳmax sāmaseƞ ϳäxši bomeϳdi-da,<br />
+                    ǯiččӓ kütip tür qaϳmax tārtaman.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>zanƞg-zaƞg</td>
+                  <td>chak-chakning bir turi</td>
+                  <td>zang-zang</td>
+                  <td>mexmāntāvāqqa zanƞg-zaƞg qïvāldïm.</td>
+                </tr>
+                <tr>
+                  <td>zinγïllaš</td>
+                  <td>tez chopmoq</td>
+                  <td>zing‘illash</td>
+                  <td>
+                    <br />
+                    bār bālam, zinγïllap dökängӓ tüšip kegin.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>züptürüm</td>
+                  <td>begona o‘t</td>
+                  <td>zupturum</td>
+                  <td>
+                    <br />
+                    qoliƞ küϳdimi, züptürümdi bӓkidӓn ālïp<br />
+                    qoϳvāl.<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>ǯiǯi</td>
+                  <td>chaqaloq</td>
+                  <td>jiji</td>
+                  <td>ǯiǯigä bešij ābārämïs</td>
+                </tr>
+                <tr>
+                  <td>ǯiǯiläš</td>
+                  <td>tug‘ish</td>
+                  <td>jijilash</td>
+                  <td>kelïnïmïz ǯiǯiläptï, körip kelej</td>
+                </tr>
+                <tr>
+                  <td>ǯičä</td>
+                  <td>ozgina, kam</td>
+                  <td>jicha</td>
+                  <td>ǯičä kütip türin, kepqālädï</td>
+                </tr>
+                <tr>
+                  <td>ǯïq</td>
+                  <td>to‘la, lim-lim</td>
+                  <td>jiq</td>
+                  <td>sömkejnï ǯïq toldïrïp kepsändä.</td>
+                </tr>
+                <tr>
+                  <td>ǯüvӓrï šorva</td>
+                  <td>taom</td>
+                  <td>juvari sho‘rva</td>
+                  <td>
+                    <br />
+                    qizlar kelišigӓ jüvari šorva sāp qojdim, qajnap jātadi<br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>ǯelej</td>
+                  <td>paranji turi</td>
+                  <td>jeley</td>
+                  <td>
+                    <br />
+                    jӓηgi kelïn köčӓgӓ čïqqanda ǯelejdï<br />
+                    ϳāpïnvāsa ϳäxši bolädi.<br />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="j1" class="section">
+          <h2>
+            devonu lug‘otit turk bilan andijon turk-barlos shevasining qiyosi
+          </h2>
+
+          <div class="sheva-table-wrapper">
+            <p>
+              quyida keltirilgan jadvalda 1961-yilda s.m.mutallibov tomonidan
+              nashrga tayyorlangan, m.koshg‘ariyning “devonu lug‘otit turk”
+              nomli asaridagi so‘zlar andijon turk-barlos shevasidagi so‘zlar
+              bilan qiyoslandi. jadvalda devonu lug‘otit turk dlt shaklida
+              berildi.
+            </p>
+
+            <table class="sheva-table">
+              <thead>
+                <tr>
+                  <th>andijon turk-barlos</th>
+                  <th>izoh</th>
+                  <th>dlt da</th>
+                  <th>adabiy tilda</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>em</td>
+                  <td>shifo</td>
+                  <td>эм</td>
+                  <td>davo</td>
+                </tr>
+                <tr>
+                  <td>esh qoʻsh</td>
+                  <td>sherik</td>
+                  <td>эш</td>
+                  <td>hamroh, oʻrtoq</td>
+                </tr>
+                <tr>
+                  <td>oγ</td>
+                  <td>ayollar ishtoning qismi</td>
+                  <td>оғ</td>
+                  <td>chodirning yuqori qismidagi yog‘ochlar</td>
+                </tr>
+                <tr>
+                  <td>un</td>
+                  <td>ovoz</td>
+                  <td>ўн</td>
+                  <td>un, tovush</td>
+                </tr>
+                <tr>
+                  <td>ona, onash</td>
+                  <td>qizlarni erkalash</td>
+                  <td>анач</td>
+                  <td>erkalash</td>
+                </tr>
+                <tr>
+                  <td>ïlïγ</td>
+                  <td></td>
+                  <td>ïлïғ</td>
+                  <td>iliq</td>
+                </tr>
+                <tr>
+                  <td>očaγ</td>
+                  <td>oʻchoq</td>
+                  <td>очақ</td>
+                  <td>oʻchoq</td>
+                </tr>
+                <tr>
+                  <td>aγaq</td>
+                  <td>oyoq</td>
+                  <td>азақ, ajaқ</td>
+                  <td>oyoq</td>
+                </tr>
+                <tr>
+                  <td>arvaq</td>
+                  <td>ozg‘in</td>
+                  <td>арïқ</td>
+                  <td>oriq</td>
+                </tr>
+                <tr>
+                  <td>uzaq</td>
+                  <td>uzoq</td>
+                  <td>узақ</td>
+                  <td>uzoq</td>
+                </tr>
+                <tr>
+                  <td>ökil atä</td>
+                  <td>tutingan ota</td>
+                  <td>öкil</td>
+                  <td>koʻp</td>
+                </tr>
+                <tr>
+                  <td>ät</td>
+                  <td>ism</td>
+                  <td>a:t</td>
+                  <td>ism, ot</td>
+                </tr>
+                <tr>
+                  <td>äčä</td>
+                  <td>opa</td>
+                  <td>ача</td>
+                  <td>opa</td>
+                </tr>
+                <tr>
+                  <td>ärä</td>
+                  <td>ora</td>
+                  <td>ара</td>
+                  <td>orasi</td>
+                </tr>
+                <tr>
+                  <td>ulaγ</td>
+                  <td>yamoq</td>
+                  <td>улағ</td>
+                  <td>yamoq</td>
+                </tr>
+                <tr>
+                  <td>ögrä</td>
+                  <td>oʻgra ovqat</td>
+                  <td>ўгрä</td>
+                  <td>oʻgra ovqat</td>
+                </tr>
+                <tr>
+                  <td>arqa</td>
+                  <td>orqa</td>
+                  <td>арқа</td>
+                  <td>orqa</td>
+                </tr>
+                <tr>
+                  <td>alqïndï</td>
+                  <td>sovun qoldig‘i</td>
+                  <td>ақïндï</td>
+                  <td>oqar suv</td>
+                </tr>
+                <tr>
+                  <td>ešilgan</td>
+                  <td>olifta</td>
+                  <td>ӭшilгäн</td>
+                  <td>surilib turadigan</td>
+                </tr>
+                <tr>
+                  <td>öčäšdi</td>
+                  <td>oʻchakishdi</td>
+                  <td>öчäшдi</td>
+                  <td>oʻchakishdi</td>
+                </tr>
+                <tr>
+                  <td>ïšändi</td>
+                  <td>ishondi</td>
+                  <td>iшäндi</td>
+                  <td>ishondi</td>
+                </tr>
+                <tr>
+                  <td>ašindi</td>
+                  <td>oʻzidan ortirdi</td>
+                  <td>ашундï</td>
+                  <td>oshdi, oʻzdi</td>
+                </tr>
+                <tr>
+                  <td>ïstattïm</td>
+                  <td>izladim</td>
+                  <td>iстäттiм</td>
+                  <td>izlatdim</td>
+                </tr>
+                <tr>
+                  <td>süqdim</td>
+                  <td>kuch bilan kiritmoq</td>
+                  <td>суқдум</td>
+                  <td>kiritmoq</td>
+                </tr>
+                <tr>
+                  <td>örmänčij</td>
+                  <td>o‘rgumchak</td>
+                  <td>öрўмчӓк</td>
+                  <td>o‘rgumchak</td>
+                </tr>
+                <tr>
+                  <td>ördej</td>
+                  <td>o‘rdak</td>
+                  <td>öрдäк</td>
+                  <td>o‘rdak</td>
+                </tr>
+                <tr>
+                  <td>činčälāq</td>
+                  <td>jimjiloq</td>
+                  <td>jïjaлaқ</td>
+                  <td>jimjiloq</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="j2" class="section">
+          <div class="sheva-table-wrapper">
+            <p>
+              quyida keltirilgan jadvalda bo‘ri xasanovning 1980 yilda yozilgan
+              “исследования узбекских говоров типа турк-барлас” nomli nomzodlik
+              dissertatsiyasida keltirilgan boshqa shevalarda uchramaydigan
+              so‘zlar jadvalini andijon turk-barlos shevasiga qiyosladik.
+            </p>
+
+            <table class="sheva-table">
+              <thead>
+                <tr>
+                  <th>boshqa shevalarda uchramaydigan so‘zlar (b.xasanov)</th>
+                  <th>andijon turk-barlos</th>
+                  <th>adabiy til</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>тӓйпↄлↄс</td>
+                  <td>čäƞg</td>
+                  <td>tegirmon toshi atrofidagi chang</td>
+                </tr>
+                <tr>
+                  <td>чызиллↄғ</td>
+                  <td>saqalaladïgan</td>
+                  <td>elektrobritva</td>
+                </tr>
+                <tr>
+                  <td>сорӓгич</td>
+                  <td>tergövči</td>
+                  <td>tergovchi</td>
+                </tr>
+                <tr>
+                  <td>жувↄп бергич</td>
+                  <td>südlänüvči</td>
+                  <td>sudlanuvchi</td>
+                </tr>
+                <tr>
+                  <td>чӓҳӓл</td>
+                  <td>xassa</td>
+                  <td>qoʻltiqtayoq</td>
+                </tr>
+                <tr>
+                  <td>xↄриш</td>
+                  <td></td>
+                  <td>bir biriga</td>
+                </tr>
+                <tr>
+                  <td>бӓқалӓ пӓмӓдↄри пӓмидър</td>
+                  <td>pämidör, pamïldarï</td>
+                  <td>pomidor</td>
+                </tr>
+                <tr>
+                  <td>чучуг</td>
+                  <td>šäkär</td>
+                  <td>shakar</td>
+                </tr>
+                <tr>
+                  <td>сӓргӓлӓк</td>
+                  <td>jupqa xalat</td>
+                  <td>yozgi xalat</td>
+                </tr>
+                <tr>
+                  <td>иттиг</td>
+                  <td>nardan, ačïγ</td>
+                  <td>nordon</td>
+                </tr>
+                <tr>
+                  <td>нↄпӓрмои</td>
+                  <td>sijareƞg</td>
+                  <td>siyohrang</td>
+                </tr>
+                <tr>
+                  <td>тишқↄли</td>
+                  <td>bardovïj</td>
+                  <td>bardoviy</td>
+                </tr>
+                <tr>
+                  <td>дусↄғ қой</td>
+                  <td></td>
+                  <td>ikki yoshli qoʻy</td>
+                </tr>
+                <tr>
+                  <td>чↄри пӓнжи қой(тӓкӓ)</td>
+                  <td></td>
+                  <td>toʻrt yoshli qoʻy</td>
+                </tr>
+                <tr>
+                  <td>туппӓ\\туппӓ эш\\лӓхша</td>
+                  <td>tuppa</td>
+                  <td>hamirli ovqat</td>
+                </tr>
+                <tr>
+                  <td>ↄвↄ\\ↄвӓ</td>
+                  <td>ↄвӓ, ämäki</td>
+                  <td>amaki</td>
+                </tr>
+                <tr>
+                  <td>қариндↄш</td>
+                  <td>qarïndaš</td>
+                  <td>ona tomon qarindosh</td>
+                </tr>
+                <tr>
+                  <td>хеш</td>
+                  <td>qarïndaš</td>
+                  <td>ota tomon qarindosh</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="j3" class="section">
+          <h2>3. Vodiy va vohda yashovchi turk-barlos shevalarining qiyosi</h2>
+          <p>Vodiy va vohda shevalari farqlari.</p>
+          <div class="sheva-table-wrapper">
+            <p>
+              Quyidagi jadvalda Andijon viloyatining Marhamat, Buloqboshi va
+              Qirg‘izistonning Aravon tumanlari turk-barlos shevasi, shuningdek
+              Bo‘ri Xasanovning 1980 yilda yozilgan dissertatsiyasidagi
+              Samarqand, Tojikiston va Qashqadaryo shevalari bilan qiyoslangan.
+            </p>
+            <table class="sheva-table">
+              <thead>
+                <tr>
+                  <th>Tersak qishlog‘i</th>
+                  <th>Sudjin qishlog‘i</th>
+                  <th>Tashkalak qishlog‘i</th>
+                  <th>Andijon turk-barlos shevasi</th>
+                  <th>Adabiy tilda</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>чↄвич</td>
+                  <td>чↄвич</td>
+                  <td>чↄвич</td>
+                  <td>čömič</td>
+                  <td>choʻmich</td>
+                </tr>
+                <tr>
+                  <td>тухча</td>
+                  <td></td>
+                  <td></td>
+                  <td>qozïčaq</td>
+                  <td>qoʻzichoq</td>
+                </tr>
+                <tr>
+                  <td>дусↄғ\\тусↄғ</td>
+                  <td>дусоғ</td>
+                  <td>дусоғ\\тусоғ</td>
+                  <td>qoj</td>
+                  <td>ikki yoshli qoʻy</td>
+                </tr>
+                <tr>
+                  <td>кↄвↄг</td>
+                  <td>ковог</td>
+                  <td>кӓвог</td>
+                  <td>kavek</td>
+                  <td>чуқурча</td>
+                </tr>
+                <tr>
+                  <td>тиннↄғ\\тирнↄғ</td>
+                  <td>тиннↄғ\\тирнↄғ</td>
+                  <td>тиннↄғ</td>
+                  <td>tïnnaγ</td>
+                  <td>tirnog‘</td>
+                </tr>
+                <tr>
+                  <td>сери</td>
+                  <td>сори</td>
+                  <td>сери</td>
+                  <td>sökče</td>
+                  <td>uzum shoxlarini tutib turgich, krovat</td>
+                </tr>
+                <tr>
+                  <td>сӓвачиғ</td>
+                  <td>сӓвачиғ</td>
+                  <td>сӓвачиғ</td>
+                  <td>sävaγič, säväčöp</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>постӓг</td>
+                  <td>постӓг</td>
+                  <td>постӓг</td>
+                  <td></td>
+                  <td>qoʻy terisi</td>
+                </tr>
+                <tr>
+                  <td>тӓннов\\тӓрнов</td>
+                  <td>тӓннов\\тӓрнов</td>
+                  <td>тӓннов</td>
+                  <td>tärnöv</td>
+                  <td>tarnov</td>
+                </tr>
+                <tr>
+                  <td>сӓвӓт</td>
+                  <td>сӓвӓт</td>
+                  <td>сӓвӓт</td>
+                  <td>sevät</td>
+                  <td>savat</td>
+                </tr>
+                <tr>
+                  <td>ↄптↄвↄ</td>
+                  <td>ↄптↄвӓ</td>
+                  <td>ↄптↄвӓ</td>
+                  <td></td>
+                  <td>suv idish</td>
+                </tr>
+                <tr>
+                  <td>йↄғлↄғы</td>
+                  <td>йↄғлↄғы</td>
+                  <td>йↄғлↄғы</td>
+                  <td>skvarotka</td>
+                  <td>tova</td>
+                </tr>
+                <tr>
+                  <td>нↄрвↄн</td>
+                  <td>нↄрвↄн</td>
+                  <td>нӓрвↄн</td>
+                  <td>šatï</td>
+                  <td>narvon</td>
+                </tr>
+                <tr>
+                  <td>инӓг\\сийир</td>
+                  <td>инӓг</td>
+                  <td>инӓг</td>
+                  <td>mal</td>
+                  <td>sigir</td>
+                </tr>
+                <tr>
+                  <td>бозӓг</td>
+                  <td>бозӓг</td>
+                  <td>бузↄв</td>
+                  <td>bözek(g)</td>
+                  <td>buzoq</td>
+                </tr>
+                <tr>
+                  <td>змↄриғ</td>
+                  <td>зӓмↄриғ</td>
+                  <td>зӓмↄриғ</td>
+                  <td>qozïqarïn</td>
+                  <td>qoʻziqorin</td>
+                </tr>
+                <tr>
+                  <td>чумчуғ</td>
+                  <td>чумчуғ</td>
+                  <td>чумчуғ</td>
+                  <td>čïmčïγ</td>
+                  <td>chumchhug‘</td>
+                </tr>
+                <tr>
+                  <td>қаллирғↄч</td>
+                  <td>қаллирғↄч</td>
+                  <td>қарлиғↄч</td>
+                  <td>qaldïrγač</td>
+                  <td>qaldirg‘och</td>
+                </tr>
+                <tr>
+                  <td>зↄв</td>
+                  <td></td>
+                  <td></td>
+                  <td>ora</td>
+                  <td>jar, handaq, chuqur</td>
+                </tr>
+                <tr>
+                  <td>ӓнньмↄғ ӓндьмↄғ</td>
+                  <td>ӓнньмↄғ ӓндьмↄғ</td>
+                  <td>ӓнньмↄғ ӓндьмↄғ</td>
+                  <td></td>
+                  <td>яширинча кузатиш</td>
+                </tr>
+                <tr>
+                  <td>җↄннↄр\\бори</td>
+                  <td></td>
+                  <td>қапишқи</td>
+                  <td>borï\\qarïšqï</td>
+                  <td>boʻri</td>
+                </tr>
+                <tr>
+                  <td>туршак</td>
+                  <td>ғолун</td>
+                  <td>туршак\\</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>зↄрдↄлиқↄқ</td>
+                  <td>örik</td>
+                  <td>oʻrik</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>чӓмич</td>
+                  <td>қўзиқорин</td>
+                  <td>чӓмгуч</td>
+                  <td>qozïqarïn</td>
+                  <td>қўзиқорин</td>
+                </tr>
+                <tr>
+                  <td>ↄптↄвↄ\\чӓйдиш</td>
+                  <td>ↄптↄвↄ</td>
+                  <td>қумғон\\</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>чӓйдиш</td>
+                  <td>qumγan\\čövgin</td>
+                  <td>қумғон</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>пӓтнис</td>
+                  <td>бӓкӓш</td>
+                  <td>лӓгӓн</td>
+                  <td></td>
+                  <td>patnis</td>
+                </tr>
+                <tr>
+                  <td>лӓйлича</td>
+                  <td>тӓхсимча</td>
+                  <td>ликↄпча</td>
+                  <td>tärelkä\\likapčä</td>
+                  <td>likopcha</td>
+                </tr>
+                <tr>
+                  <td>бостимӓқ</td>
+                  <td>ғарӓм</td>
+                  <td>искирт</td>
+                  <td>bastïrma\\γaram</td>
+                  <td>pichan uyimi</td>
+                </tr>
+                <tr>
+                  <td>вӓйиш</td>
+                  <td>вӓлӓң</td>
+                  <td>вӓлӓң</td>
+                  <td>sökče</td>
+                  <td>uzu novdalarini ushlab turuvchi</td>
+                </tr>
+                <tr>
+                  <td>ғӓзӓ</td>
+                  <td>теппӓ</td>
+                  <td>ғӓзӓ</td>
+                  <td>Tepalïγ\\bälät</td>
+                  <td>tepalik</td>
+                </tr>
+                <tr>
+                  <td>ↄлвↄли</td>
+                  <td>ↄлвↄли</td>
+                  <td>ↄлвↄли</td>
+                  <td>ačïγ gïlas</td>
+                  <td>gilos</td>
+                </tr>
+                <tr>
+                  <td>котӓл</td>
+                  <td></td>
+                  <td></td>
+                  <td>pereval</td>
+                  <td>pereval</td>
+                </tr>
+                <tr>
+                  <td>қьрриғ</td>
+                  <td>қьрриғ</td>
+                  <td>қьрриғ</td>
+                  <td>qopäl</td>
+                  <td>qoʻpol</td>
+                </tr>
+                <tr>
+                  <td>бↄшуғ</td>
+                  <td>бↄшуғ</td>
+                  <td>бↄшуғ</td>
+                  <td>äčigän qatïγ</td>
+                  <td>nordon qatiq(bosh yuvish uchun)</td>
+                </tr>
+                <tr>
+                  <td>җувↄнӓ</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>buqa 2,4 yosh</td>
+                </tr>
+                <tr>
+                  <td>кӓшкӓшӓк</td>
+                  <td></td>
+                  <td></td>
+                  <td>čözmä</td>
+                  <td>choʻzma</td>
+                </tr>
+                <tr>
+                  <td>җилоп</td>
+                  <td></td>
+                  <td></td>
+                  <td>pajpaγ</td>
+                  <td>paypoq</td>
+                </tr>
+                <tr>
+                  <td>йергӓнӓк</td>
+                  <td></td>
+                  <td></td>
+                  <td>Rišötkä\\temïr setkä</td>
+                  <td>panjara</td>
+                </tr>
+                <tr>
+                  <td>ғьлвинни\\ғьлминни</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    hamirni yoyib, ichiga shaker va tvorog solib qoviriladi.
+                  </td>
+                </tr>
+                <tr>
+                  <td>ӓңңↄр</td>
+                  <td></td>
+                  <td></td>
+                  <td>ängär</td>
+                  <td>hosil yig‘ib olingan dala</td>
+                </tr>
+                <tr>
+                  <td>ӓлӓғдӓ</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>behalovat</td>
+                </tr>
+                <tr>
+                  <td>бағриқмↄқ</td>
+                  <td></td>
+                  <td></td>
+                  <td>boγïlïš</td>
+                  <td>boʻg‘ilmoq</td>
+                </tr>
+                <tr>
+                  <td>бↄжӓ</td>
+                  <td></td>
+                  <td></td>
+                  <td>baǯä</td>
+                  <td>boja</td>
+                </tr>
+                <tr>
+                  <td>бↄшвↄғ\\бↄшвↄқ</td>
+                  <td></td>
+                  <td></td>
+                  <td>arqan</td>
+                  <td>hayvonlarni boʻyinini bog‘lashga arqon</td>
+                </tr>
+                <tr>
+                  <td>бозак</td>
+                  <td>бзӓк\\бузↄқ</td>
+                  <td>бозак</td>
+                  <td>bözek</td>
+                  <td>buzoq</td>
+                </tr>
+                <tr>
+                  <td>ботӓна</td>
+                  <td></td>
+                  <td></td>
+                  <td>bötänä</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>йӓңңӓ</td>
+                  <td>йӓңңӓ</td>
+                  <td>йӓңңӓ</td>
+                  <td>kennäjä</td>
+                  <td>akaning hotini</td>
+                </tr>
+                <tr>
+                  <td>җӓпчи</td>
+                  <td>җӓпчи</td>
+                  <td>җӓпчи</td>
+                  <td>söči</td>
+                  <td>sovchi</td>
+                </tr>
+                <tr>
+                  <td>пↄччӓ\\йӓзнӓ</td>
+                  <td>пↄччӓ\\йӓзнӓ</td>
+                  <td>пↄччӓ\\йӓзнӓ</td>
+                  <td></td>
+                  <td>paččä, opa yoki singilning eri</td>
+                </tr>
+                <tr>
+                  <td>ушↄғ\\увоғ</td>
+                  <td>ушↄғ\\увоғ</td>
+                  <td>ушↄғ\увоғ</td>
+                  <td>ušäq\\uvaγ</td>
+                  <td>non ushog‘i</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="j4" class="section">
+          <h2>
+            4. Andijon, Buloqboshi va Aravon turk-barlos shevalarining qiyosi
+          </h2>
+          <div class="sheva-table-wrapper">
+            <table class="sheva-table">
+              <thead>
+                <tr>
+                  <th>ADABIY TILDA</th>
+                  <th>MARHAMAT</th>
+                  <th>BULOQBOSHI</th>
+                  <th>ARAVON</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>sovun qoldig‘i</td>
+                  <td>ālqïndï</td>
+                  <td>yäländï</td>
+                  <td>alqïndï</td>
+                </tr>
+                <tr>
+                  <td>arqon</td>
+                  <td>arqan</td>
+                  <td>ip, arγamči</td>
+                  <td>arqan</td>
+                </tr>
+                <tr>
+                  <td>ozg‘in</td>
+                  <td>ärvaq</td>
+                  <td>arvaq</td>
+                  <td>čillašïr\\arvaq</td>
+                </tr>
+                <tr>
+                  <td>yaylov</td>
+                  <td>ängär</td>
+                  <td>-</td>
+                  <td>ängär</td>
+                </tr>
+                <tr>
+                  <td>talamon</td>
+                  <td>ängär</td>
+                  <td>tälämān</td>
+                  <td>ängär</td>
+                </tr>
+                <tr>
+                  <td>ora</td>
+                  <td>ärä</td>
+                  <td>āra</td>
+                  <td>ärä</td>
+                </tr>
+                <tr>
+                  <td>oftob</td>
+                  <td>āptö</td>
+                  <td>āftā</td>
+                  <td>āpto</td>
+                </tr>
+                <tr>
+                  <td>amaki</td>
+                  <td>āвӓ, ämäki</td>
+                  <td>ämäki\\büvä</td>
+                  <td>āva</td>
+                </tr>
+                <tr>
+                  <td>chala pishgan o‘rik</td>
+                  <td>hom</td>
+                  <td>ālatāp</td>
+                  <td>hom</td>
+                </tr>
+                <tr>
+                  <td>boraveringlar</td>
+                  <td>bārišövir</td>
+                  <td>bārïp ke</td>
+                  <td>bārišövir</td>
+                </tr>
+                <tr>
+                  <td>molxona</td>
+                  <td>bastïrma</td>
+                  <td>näves</td>
+                  <td>bastïrma</td>
+                </tr>
+                <tr>
+                  <td>loyqa</td>
+                  <td>botana</td>
+                  <td>läjqä</td>
+                  <td>lājqa</td>
+                </tr>
+                <tr>
+                  <td>qo‘lqop</td>
+                  <td>pïrčätkä\\biyalek</td>
+                  <td>bijälä</td>
+                  <td>bijälä</td>
+                </tr>
+                <tr>
+                  <td>sochiq</td>
+                  <td>čäčiγ</td>
+                  <td>čäčiγ</td>
+                  <td>sāčïγ</td>
+                </tr>
+                <tr>
+                  <td>doira</td>
+                  <td>čïrmӓndӓ\\čïldïrmӓ</td>
+                  <td>dombïra</td>
+                  <td>čïrmӓndӓ\\čïldïrmӓ</td>
+                </tr>
+                <tr>
+                  <td>tugish</td>
+                  <td>tugïš</td>
+                  <td>čigiš</td>
+                  <td>tugïš</td>
+                </tr>
+                <tr>
+                  <td>chimxo‘r</td>
+                  <td>čïm tāmāq</td>
+                  <td>čïn tāmāq</td>
+                  <td>čïm tāmāq \\qïltanāq</td>
+                </tr>
+                <tr>
+                  <td>urishqoq</td>
+                  <td>čoγal</td>
+                  <td>uzqärä</td>
+                  <td>čoγal</td>
+                </tr>
+                <tr>
+                  <td>chumoli</td>
+                  <td>čumälij</td>
+                  <td>qumirsqa</td>
+                  <td>čumālïj</td>
+                </tr>
+                <tr>
+                  <td>beshik yopinchi‘i</td>
+                  <td>gāvräpoš</td>
+                  <td>gävärä</td>
+                  <td>jāpqïč</td>
+                </tr>
+                <tr>
+                  <td>o‘qtalish</td>
+                  <td>doläjïš</td>
+                  <td>göläjiš</td>
+                  <td>goläjïš</td>
+                </tr>
+                <tr>
+                  <td>samiz</td>
+                  <td>lapaγ</td>
+                  <td>längillägän</td>
+                  <td>lapangläp</td>
+                </tr>
+                <tr>
+                  <td>lahm</td>
+                  <td>loγït</td>
+                  <td>lahm</td>
+                  <td>loγït</td>
+                </tr>
+                <tr>
+                  <td>betoqat bo‘lish</td>
+                  <td>betoqat bo‘lish</td>
+                  <td>ilärïš</td>
+                  <td>betoqat bo‘lish</td>
+                </tr>
+                <tr>
+                  <td>yaraning suvlanishi</td>
+                  <td>ilviräš</td>
+                  <td>ilǯiräš</td>
+                  <td>ilviräš</td>
+                </tr>
+                <tr>
+                  <td>izlash</td>
+                  <td>ïstӓš</td>
+                  <td>ïstäš</td>
+                  <td>izläš</td>
+                </tr>
+                <tr>
+                  <td>kelaver</td>
+                  <td>kelö:vir</td>
+                  <td>kelāvr</td>
+                  <td>kelö:vir</td>
+                </tr>
+                <tr>
+                  <td>mo‘ylov</td>
+                  <td>möjlöv</td>
+                  <td>möjlā</td>
+                  <td>möjlöv</td>
+                </tr>
+                <tr>
+                  <td>saryog‘</td>
+                  <td>mӓskӓϳāγ</td>
+                  <td>sarjāγ</td>
+                  <td>kuvajāγ</td>
+                </tr>
+                <tr>
+                  <td>musicha</td>
+                  <td>mïsïlčä</td>
+                  <td>miččä</td>
+                  <td>mïsïlčä</td>
+                </tr>
+                <tr>
+                  <td>ezg‘ilash</td>
+                  <td>mïǯïqläš</td>
+                  <td>γïǯïmläš</td>
+                  <td>mïǯïqläš</td>
+                </tr>
+                <tr>
+                  <td>govmijja</td>
+                  <td>nijnačuq</td>
+                  <td>ninälāγič</td>
+                  <td>nijnačuq</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>parï\\lӓnkӓ</td>
+                  <td>par</td>
+                  <td>lӓnkӓ</td>
+                </tr>
+                <tr>
+                  <td>daraxtni shoxlatish</td>
+                  <td>parγama</td>
+                  <td>parxama</td>
+                  <td>parγama</td>
+                </tr>
+                <tr>
+                  <td>achitqisiz qozon noni</td>
+                  <td>qatïrma</td>
+                  <td>poškäl</td>
+                  <td>qatïrma</td>
+                </tr>
+                <tr>
+                  <td>ekish</td>
+                  <td>süqïš</td>
+                  <td>ekiš</td>
+                  <td>suqïš</td>
+                </tr>
+                <tr>
+                  <td>sovchi</td>
+                  <td>söči</td>
+                  <td>sāvči</td>
+                  <td>sövči</td>
+                </tr>
+                <tr>
+                  <td>so‘ri</td>
+                  <td>sökče</td>
+                  <td>sokčäj</td>
+                  <td>sökčej</td>
+                </tr>
+                <tr>
+                  <td>ninachi</td>
+                  <td>sözäjnej</td>
+                  <td>ātaǯüvänäk</td>
+                  <td>sözäjnej</td>
+                </tr>
+                <tr>
+                  <td>chalpak</td>
+                  <td>sozma</td>
+                  <td>čozma</td>
+                  <td>čozma</td>
+                </tr>
+                <tr>
+                  <td>eshik tambasi</td>
+                  <td>ešij tamba</td>
+                  <td>taqa</td>
+                  <td>qulp</td>
+                </tr>
+                <tr>
+                  <td>urinchoq</td>
+                  <td>epčil</td>
+                  <td>tutïmsaγ</td>
+                  <td>epčil</td>
+                </tr>
+                <tr>
+                  <td>tirnoq</td>
+                  <td>tïnnaγ</td>
+                  <td>tïndäq</td>
+                  <td>tïndaγ</td>
+                </tr>
+                <tr>
+                  <td>buzoqcha</td>
+                  <td>toqala</td>
+                  <td>bözäk</td>
+                  <td>toqa</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- VIDEO MATERIALLAR -->
+        <div id="f1" class="section">
+          <h2>
+            1. Qayerdan ko‘chib kelganingiz va qaysi urug‘ga mansub ekanligingiz
+            haqidabilasizmi?
+          </h2>
+          <p>Hududiy axborot va video.</p>
+
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/TU-gCUljTWw?modestbranding=1&rel=0&controls=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+
+        <div id="f2" class="section">
+          <h2>
+            2. Turk-barloslarni boshqa urug‘ vakillaridan qanday ajratib olasiz?
+          </h2>
+          <p>Hududiy axborot va video.</p>
+          <video controls>
+            <source
+              src="videos1/2-5237836192271076611_Sir1mweP.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+
+        <div id="f3" class="section">
+          <h2>3. Ajdodlaringiz qanday mehnat bilan shug‘ullangan.</h2>
+          <p>Hududiy axborot va video.</p>
+          <video controls>
+            <source
+              src="videos/2-5231104741567665938_6ptWxCyz.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+
+        <!-- AXBOROTCHILAR -->
+        <div id="ax1" class="section">
+          <h2>Marhamat tuman</h2>
+          <p>Hududiy axborot va video.</p>
+
+          <div class="video-section-inner">
+            <div class="video-player-container" id="ax1player">
+              <p>Video tanlang</p>
+            </div>
+
+            <div class="video-text-list">
+              <div
+                class="video-text-item"
+                onclick="playYouTube('zesOA2OamoQ', 'ax1player')"
+              >
+                YouTube Video1
+              </div>
+              <div
+                class="video-text-item"
+                onclick="playYouTube('HsJE6vmTUJo', 'ax1player')"
+              >
+                YouTube Video2
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="ax2" class="section">
+          <h2>Buloqboshi tuman</h2>
+          <p>Hududiy axborot va video.</p>
+
+          <div class="video-section-inner">
+            <div class="video-player-container" id="ax2player">
+              <p>Video tanlang</p>
+            </div>
+
+            <div class="video-text-list">
+              <div
+                class="video-text-item"
+                onclick="playYouTube('QNy_O0R30N0', 'ax2player')"
+              >
+                YouTube Video1
+              </div>
+              <div
+                class="video-text-item"
+                onclick="playYouTube('esuyBxA1lYg', 'ax2player')"
+              >
+                YouTube Video2
+              </div>
+              <div
+                class="video-text-item"
+                onclick="playYouTube('JrbQRAUEMvs', 'ax2player')"
+              >
+                YouTube Video3
+              </div>
+              <div
+                class="video-text-item"
+                onclick="playYouTube('l0XFlX45yOQ', 'ax2player')"
+              >
+                YouTube Video4
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="ax3" class="section">
+          <h2>Aravon tuman</h2>
+          <p>Hududiy axborot va video.</p>
+
+          <div class="video-section-inner">
+            <div class="video-player-container" id="ax3player">
+              <p>Video tanlang</p>
+            </div>
+
+            <div class="video-text-list">
+              <div
+                class="video-text-item"
+                onclick="playYouTube('ecDHgPAIBTc', 'ax3player')"
+              >
+                YouTube Video1
+              </div>
+              <div
+                class="video-text-item"
+                onclick="playYouTube('rpSeUrWZu1c', 'ax3player')"
+              >
+                YouTube Video2
+              </div>
+              <div
+                class="video-text-item"
+                onclick="playYouTube('qmHUZS1SGYI', 'ax3player')"
+              >
+                YouTube Video3
+              </div>
+              <div
+                class="video-text-item"
+                onclick="playYouTube('Tv3fad9Svok', 'ax3player')"
+              >
+                YouTube Video4
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="ax_full" class="section">
+          <h2>Axborotchilar</h2>
+
+          <div class="cards-container">
+            <!-- 1 -->
+            <div class="card">
+              <img src="axborotchilar/1.png" />
+              <div class="card-content">
+                <h3>To‘xtasinova Qiymatxon</h3>
+                <p>Mar. Qorabog‘ish qishlogʻi, Kalxozchi, 84 yosh(qashqari)</p>
+              </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="card">
+              <img src="axborotchilar/2.png" />
+              <div class="card-content">
+                <h3>Boltaboyeva Kimsanxon</h3>
+                <p>Mar. Ko‘mirchi ko‘cha, 78 yosh(turk)</p>
+              </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="card">
+              <img src="axborotchilar/3.png" />
+              <div class="card-content">
+                <h3>Mansurova Karomat</h3>
+                <p>Kalxozchi, Mar. Qorabog‘ish qishlogʻi,64 yosh(turk)</p>
+              </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="card">
+              <img src="axborotchilar/4.png" />
+              <div class="card-content">
+                <h3>Santalat hola</h3>
+                <p>72 yosh</p>
+              </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="card">
+              <img src="axborotchilar/5.png" />
+              <div class="card-content">
+                <h3>Oynisa hola</h3>
+                <p>
+                  uy bekasi, Mar. Qorabog‘ish qishlogʻi, 90 yosh (turk+tojik)
+                </p>
+              </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="card">
+              <img src="axborotchilar/7.png" />
+              <div class="card-content">
+                <h3>Ahmadaliyev Muhtor</h3>
+                <p>O‘qituvchi, Ara. Lenin mahalla, 84 yosh(turk)</p>
+              </div>
+            </div>
+            <!-- 1 -->
+            <div class="card">
+              <img src="axborotchilar/8.png" />
+              <div class="card-content">
+                <h3>Abduqayumov Turdali</h3>
+                <p>O‘qituvchi, Ara. Boyto‘pi, 80yosh (turk+qirg‘iz)</p>
+              </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="card">
+              <img src="axborotchilar/9.png" />
+              <div class="card-content">
+                <h3>Shukurullo</h3>
+                <p>shafyor, Aravon, 55 yosh(turk)</p>
+              </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="card">
+              <img src="axborotchilar/10.png" />
+              <div class="card-content">
+                <h3>Eshqo‘ziyev Ergashali</h3>
+                <p>O‘qituvchi, Ara. Turkmahalla, 87 yosh (turk-barlos)</p>
+              </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="card">
+              <img src="axborotchilar/11.png" />
+              <div class="card-content">
+                <h3>Ermuhammedov Hudoyberdi</h3>
+                <p>ishchi, Ara. Turkmahalla, 85 yosh(turk-barlos)</p>
+              </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="card">
+              <img src="axborotchilar/12.png" />
+              <div class="card-content">
+                <h3>Anarbayeva Halima</h3>
+                <p>Kalxozchi, Ara. Boyto‘pi mahalla, 76 yosh(turk)</p>
+              </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="card">
+              <img src="axborotchilar/13.png" />
+              <div class="card-content">
+                <h3>Hamdamova Momoxon</h3>
+                <p>Laparchi, Ara. Chekobot qishlogʻi, 63 yosh(turk)</p>
+              </div>
+            </div>
+            <!-- 1 -->
+            <div class="card">
+              <img src="axborotchilar/14.png" />
+              <div class="card-content">
+                <h3>Hudoyberdiyeva Oyimqiz</h3>
+                <p>, Mar. Rohat qish, 95 yosh(turk)</p>
+              </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="card">
+              <img src="axborotchilar/15.png" />
+              <div class="card-content">
+                <h3>Ahmadaliyeva Santalatxon</h3>
+                <p>Kolxozchi, Mar. Qorabog‘ish qishlogʻi, 75 yosh(turk)</p>
+              </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="card">
+              <img src="axborotchilar/16.png" />
+              <div class="card-content">
+                <h3>Ermuhammedova Adolatxon</h3>
+                <p>Kolxozchi, Ara. Turkmahalla 84 yosh(turk)</p>
+              </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="card">
+              <img src="axborotchilar/17.png" />
+              <div class="card-content">
+                <h3>Yo‘ldasheva Shoistaxon</h3>
+                <p>
+                  O‘qituvchi, Mar. Kelelin qishlogʻi, 53 yosh(qashqari oxun)
+                </p>
+              </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="card">
+              <img src="axborotchilar/18.png" />
+              <div class="card-content">
+                <h3>Umarov Murodiljon</h3>
+                <p>Hisobchi, Mar. Rohat qishlogʻi, 63 yosh(qashqari oxun)</p>
+              </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="card">
+              <img src="axborotchilar/19.png" />
+              <div class="card-content">
+                <h3>Haydarov Ismoil</h3>
+                <p>Ishchi, Bul. Shirmonbuloq qishlogʻi, 74 yosh(turk)</p>
+              </div>
+            </div>
+            <!-- 1 -->
+            <div class="card">
+              <img src="axborotchilar/20.png" />
+              <div class="card-content">
+                <h3>Orziyev Mahamadvali</h3>
+                <p>O‘qituvchi, Bul. Shirmonbuloq, 70 yosh(turk)</p>
+              </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="card">
+              <img src="axborotchilar/22.png" />
+              <div class="card-content">
+                <h3>Qorayev Ashirali</h3>
+                <p>aloqachi, Bul. Shirmonbuloq, 87 yosh (turk)</p>
+              </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="card">
+              <img src="axborotchilar/23.png" />
+              <div class="card-content">
+                <h3>Haydarov Qo‘ldosh</h3>
+                <p>O‘qituvchi, Bul. Shirmonbuloq qishlogʻi, 80 yosh(turk)</p>
+              </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="card">
+              <img src="axborotchilar/24.png" />
+              <div class="card-content">
+                <h3>Mirzayeva Ergash</h3>
+                <p>O‘qituvchi, Ara. Chekobot qishlogʻi, 81 yosh(turk)</p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="axborotchilar/6.png" />
+              <div class="card-content">
+                <h3>Sattorova Salomatxon</h3>
+                <p>Dehqon, Mar. Qorabog‘ish qish, 67 yosh(turk)</p>
+              </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="card">
+              <img src="axborotchilar/25.png" />
+              <div class="card-content">
+                <h3>Shirmonbuloq qishlog‘i</h3>
+                <p>
+                  Tojixo‘jayev Shukurulla, Anarbayeva Marifat, Umarov
+                  Murodiljon(dadam)
+                </p>
+              </div>
+            </div>
+            <!-- 1 -->
+            <div class="card">
+              <img src="axborotchilar/26.png" />
+              <div class="card-content">
+                <h3>Marhamat tumani</h3>
+                <p>
+                  Tarix muzeyi rahbari Xusanov Ortig‘ali domla bilan suhbat
+                  jarayoni.
+                </p>
+              </div>
+            </div>
+
+            <!-- 2 -->
+          </div>
+        </div>
+        <body>
+          <!-- Sizning barcha HTML kodlar -->
+
+          <script>
+            function playYouTube(videoId, playerId) {
+              document.getElementById(playerId).innerHTML = `
+    <iframe 
+      width="100%" 
+      height="315" 
+      src="https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&controls=1" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
+  `;
+            }
+          </script>
+        </body>
+
+        <!-- ERTAK -->
+        <div id="ertak" class="section">
+          <h2>Ertak</h2>
+          <p>Turk-barloslar ertaklari.</p>
+
+          <div class="video-section-inner">
+            <div class="video-player-container" id="nx1player">
+              <p>Video tanlang</p>
+            </div>
+
+            <div class="video-text-list">
+              <div
+                class="video-text-item"
+                onclick="playYouTube('UeKfy3owU2M', 'nx1player')"
+              >
+                Video 1
+              </div>
+
+              <div
+                class="video-text-item"
+                onclick="playYouTube('ohzU5jx5Hrc', 'nx1player')"
+              >
+                Video 2
+              </div>
+
+              <div
+                class="video-text-item"
+                onclick="playYouTube('iUX0-6lHBqw', 'nx1player')"
+              >
+                Video 3
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOPISHMOQ -->
+        <div id="topishmoq" class="section">
+          <h2>Topishmoq</h2>
+          <p>Topishmoqlar va hazilomuz she'rlar.</p>
+          <video controls>
+            <source
+              src="videos2/2-5237836192271076393_hB4UqVsp.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+
+        <!-- MAQOL -->
+        <div id="maqol" class="section">
+          <h2>Maqol</h2>
+          <p>Turk-barlos maqollari va ularning izohi.</p>
+          <video controls>
+            <source src="videos/2_5247055468420961423.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- QOSHIQLAR -->
+        <div id="q1" class="section">
+          <h2>1. Kelin salom</h2>
+          <p>Qo'shiq matni yoki tavsifi.</p>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/FE1EtjNCfoQ "
+            title="YouTube video player"
+            frameborder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+
+        <div id="q2" class="section">
+          <h2>2. Yor-yor</h2>
+          <p>Qo'shiq matni yoki tavsifi.</p>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/7qSXDJIFFjk"
+            title="YouTube video player"
+            frameborder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+
+        <div id="q3" class="section">
+          <h2>3. Ona</h2>
+          <p>Qo'shiq matni yoki tavsifi.</p>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/L78lJLuue1I "
+            title="YouTube video player"
+            frameborder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+
+        <!-- AUDIO MATERIALLAR -->
+        <div id="audio" class="section">
+          <h2>Audio materiallar</h2>
+          <p>Audio yozuvlar va musiqiy materiallar.</p>
+
+          <div class="audio-list">
+            <div class="audio-item">
+              <div class="audio-thumb">🎵</div>
+              <div class="audio-info">
+                <h4>97 yosh</h4>
+                <audio controls controlsList="nodownload">
+                  <source src="audios/97_yosh.mp3" type="audio/mp3" />
+                </audio>
+              </div>
+            </div>
+
+            <div class="audio-item">
+              <div class="audio-thumb">🎵</div>
+              <div class="audio-info">
+                <h4>Ilon voqe</h4>
+                <audio controls controlsList="nodownload">
+                  <source src="audios/Ilon_voqe.mp3" type="audio/mp3" />
+                </audio>
+              </div>
+            </div>
+
+            <div class="audio-item">
+              <div class="audio-thumb">🎵</div>
+              <div class="audio-info">
+                <h4>Qarabog‘ish</h4>
+                <audio controls controlsList="nodownload">
+                  <source src="audios/Qarabogish.mp3" type="audio/mp3" />
+                </audio>
+              </div>
+            </div>
+
+            <div class="audio-item">
+              <div class="audio-thumb">🎵</div>
+              <div class="audio-info">
+                <h4>Голос 011</h4>
+                <audio controls controlsList="nodownload">
+                  <source src="audios/ovoz_011.mp3" type="audio/mp3" />
+                </audio>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BIZ BILAN ALOQA -->
+        <div id="contact" class="section">
+          <h2>Biz bilan aloqa</h2>
+
+          <div class="contact-info">
+            <a href="mailto:turkbarlossheva@gmail.com"
+              >Gmail: turkbarlossheva@gmail.com</a
+            >
+            <a href="tel:+998931332920">Telefon: +998 93 133 29 20</a>
+          </div>
+
+          <div class="contact-form">
+            <form id="contact-form">
+              <div class="form-group">
+                <label for="name">Ismingiz</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Ismingizni kiriting"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email manzilingiz</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Emailingizni kiriting"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Xabaringiz</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Xabaringizni yozing"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="agree" name="agree" required />
+                <label for="agree">Rozi bo'lish</label>
+              </div>
+
+              <button type="submit" class="btn-submit">Yuborish</button>
+            </form>
+          </div>
+        </div>
+        <!-- EMAILJS SDK -->
+        <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+        <script>
+          emailjs.init("YOUR_PUBLIC_KEY"); // <-- Bu yerga EmailJS public key qo'ying
+
+          document
+            .getElementById("contact-form")
+            .addEventListener("submit", function (event) {
+              event.preventDefault();
+
+              const form = event.target;
+              const formData = {
+                from_name: form.name.value,
+                from_email: form.email.value,
+                message: form.message.value,
+              };
+
+              emailjs
+                .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData) // <-- Service ID va Template ID qo'ying
+                .then(
+                  function (response) {
+                    alert("Rahmat! Sizning xabaringiz yuborildi.");
+                    form.reset();
+                  },
+                  function (error) {
+                    alert(
+                      "Xatolik yuz berdi. Iltimos, keyinroq urinib ko‘ring.",
+                    );
+                    console.log(error);
+                  },
+                );
+            });
+        </script>
+
+        <!-- FREE-STANDING MAP AND DISTRICTS AT BOTTOM -->
+        <div class="big-section">
+          <img src="images/uz-country-map.webp" />
+        </div>
+
+        <div class="small-cards-container">
+          <div
+            class="small-card"
+            data-url="https://uz.wikipedia.org/wiki/Marhamat_tumani"
+          >
+            <img src="images/Marhamattumani.png" alt="Marhamat" />
+            <h4>Marhamat tumani</h4>
+          </div>
+
+          <div
+            class="small-card"
+            data-url="https://uz.wikipedia.org/wiki/Buloqboshi_tumani"
+          >
+            <img src="images/Buloqboshi-tumani.png" alt="Buloqboshi" />
+            <h4>Buloqboshi tumani</h4>
+          </div>
+
+          <div
+            class="small-card"
+            data-url="https://uz.wikipedia.org/wiki/Aravon_tumani"
+          >
+            <img src="images/Arvon-tumani.png" alt="Arvon" />
+            <h4>Arvon tumani</h4>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      function showSection(id) {
+        document
+          .querySelectorAll(".section")
+          .forEach((s) => s.classList.remove("active"));
+        let section = document.getElementById(id);
+        if (section) {
+          section.classList.add("active");
+        }
+      }
+
+      // default opening
+      document.addEventListener("DOMContentLoaded", function () {
+        showSection("home");
+      });
+
+      function toggle(id) {
+        let el = document.getElementById(id);
+        el.style.display = el.style.display === "block" ? "none" : "block";
+      }
+
+      function playVideo(file, playerId = "player", sectionId = "video") {
+        if (sectionId) {
+          showSection(sectionId);
+        }
+        let player = document.getElementById(playerId);
+        if (player) {
+          player.src = "videos/" + file;
+          player.load();
+          player.play();
+        }
+      }
+
+      document.querySelectorAll(".small-card").forEach(function (card) {
+        card.addEventListener("click", function () {
+          let url = card.getAttribute("data-url");
+          if (url) {
+            window.open(url, "_blank");
+          }
+        });
+      });
+
+      function handleContactSubmit(event) {
+        event.preventDefault();
+        alert("Rahmat! Sizning xabaringiz yuborildi.");
+        event.target.reset();
+      }
+    </script>
+  </body>
+</html>
