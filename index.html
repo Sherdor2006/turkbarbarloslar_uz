@@ -3736,22 +3736,71 @@
         </div>
 
         <!-- QOSHIQLAR -->
+
         <div id="q1" class="section">
           <h2>1. Kelin salom</h2>
           <p>Qo'shiq matni yoki tavsifi.</p>
-          <div id="player1"></div>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/FE1EtjNCfoQ?modestbranding=1&rel=0&controls=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
+            allowfullscreen
+          >
+          </iframe>
         </div>
 
         <div id="q2" class="section">
           <h2>2. Yor-yor</h2>
           <p>Qo'shiq matni yoki tavsifi.</p>
-          <div id="player2"></div>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/7qSXDJIFFjk?modestbranding=1&rel=0&controls=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
+            allowfullscreen
+          >
+          </iframe>
         </div>
 
         <div id="q3" class="section">
           <h2>3. Ona</h2>
           <p>Qo'shiq matni yoki tavsifi.</p>
-          <div id="player3"></div>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/L78lJLuue1I?modestbranding=1&rel=0&controls=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
+            allowfullscreen
+          >
+          </iframe>
         </div>
 
         <!-- AUDIO MATERIALLAR -->
@@ -3951,141 +4000,35 @@
     </div>
 
     <script>
-      // Bo‘limlarni ko‘rsatish va videolarni pauza qilish
-      function showSection(sectionId) {
-        // Barcha bo‘limlarni yopish
-        const sections = document.querySelectorAll(".section");
-        sections.forEach((sec) => {
-          sec.style.display = "none";
-
-          // Agar bo‘lim ichida video bo‘lsa, pauza berish va boshiga qaytarish
-          const videos = sec.querySelectorAll("video");
-          videos.forEach((v) => {
-            v.pause();
-            v.currentTime = 0; // optional: video boshiga qaytarish
-          });
-
-          // Active klassini olib tashlash (belgi uchun)
-          sec.classList.remove("active");
-        });
-
-        // Tanlangan bo‘limni ko‘rsatish
-        const target = document.getElementById(sectionId);
-        if (target) {
-          target.style.display = "block";
-          target.classList.add("active"); // optional, agar CSS bilan ishlatmoqchi bo‘lsangiz
-        }
-      }
-
-      // Sidebar dropdown toggle
-      function toggleDropdown(event, sectionId) {
-        event.preventDefault();
-
-        const section = document.getElementById(sectionId);
-        const link = event.currentTarget;
-
-        if (section.style.display === "none" || section.style.display === "") {
-          section.style.display = "block";
-          link.classList.add("active"); // belgi aylanishi uchun
-        } else {
-          section.style.display = "none";
-          link.classList.remove("active");
-        }
-      }
-
-      // Video o‘ynatish va bo‘limga o‘tish
-      function playVideo(file, playerId = "player", sectionId = "video") {
-        if (sectionId) {
-          showSection(sectionId);
-        }
-        let player = document.getElementById(playerId);
-        if (player) {
-          player.src = "videos/" + file;
-          player.load();
-          player.play();
-        }
-      }
-
-      // Default sahifa ochilishi
-      document.addEventListener("DOMContentLoaded", function () {
-        showSection("home");
-      });
-
-      // Oddiy toggle uchun
-      function toggle(id) {
-        let el = document.getElementById(id);
-        el.style.display = el.style.display === "block" ? "none" : "block";
-      }
-
-      // Kontakt form submit
-      function handleContactSubmit(event) {
-        event.preventDefault();
-        alert("Rahmat! Sizning xabaringiz yuborildi.");
-        event.target.reset();
-      }
-
-      // Card click
-      document.querySelectorAll(".small-card").forEach(function (card) {
-        card.addEventListener("click", function () {
-          let url = card.getAttribute("data-url");
-          if (url) {
-            window.open(url, "_blank");
-          }
-        });
-      });
-
-      // YouTube video o‘ynatish (iframe bilan)
-      function playYouTube(videoId, containerId) {
-        const container = document.getElementById(containerId);
-
-        // avval barcha videolarni pauza qilamiz
-        document.querySelectorAll("video").forEach((v) => v.pause());
-        document
-          .querySelectorAll(".video-player-container iframe")
-          .forEach((iframe) => {
-            iframe.contentWindow.postMessage(
-              '{"event":"command","func":"pauseVideo","args":""}',
-              "*",
-            );
-          });
-
-        // iframe yaratish
-        container.innerHTML = `
-    <iframe
-      width="100%"
-      height="315"
-      src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&modestbranding=1&rel=0&controls=1"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-  `;
-      }
-
-      // showSection funksiyasi bo‘limni ko‘rsatadi va video pauza qiladi
+      // BO'LIMLARNI KO'RSATISH VA VIDEOLARNI TO'XTATISH
       function showSection(sectionId) {
         const sections = document.querySelectorAll(".section");
+
         sections.forEach((sec) => {
-          sec.style.display = "none";
-          sec.classList.remove("active");
-
-          // video pauza qilish
-          sec.querySelectorAll("video").forEach((v) => {
-            v.pause();
-            v.currentTime = 0;
-          });
-
-          // YouTube iframe pauza
-          sec
-            .querySelectorAll(".video-player-container iframe")
-            .forEach((iframe) => {
-              iframe.contentWindow.postMessage(
-                '{"event":"command","func":"pauseVideo","args":""}',
-                "*",
-              );
+          // Agar bo'lim ochiq bo'lsa, uni yopishdan oldin medialarni to'xtatamiz
+          if (
+            sec.style.display === "block" ||
+            sec.classList.contains("active")
+          ) {
+            // 1. Local HTML5 Video va Audiolarni to'xtatish
+            sec.querySelectorAll("video, audio").forEach((media) => {
+              media.pause();
+              media.currentTime = 0; // xohlasangiz boshiga qaytarib qo'yadi
             });
+
+            // 2. YouTube iframe'larni to'xtatish (eng ishonchli usul - manbani yangilash)
+            sec.querySelectorAll("iframe").forEach((iframe) => {
+              let currentSrc = iframe.src;
+              iframe.src = currentSrc; // iframe'ni yangilash orqali videoni uzadi
+            });
+          }
+
+          // Bo'limni yashirish
+          sec.style.display = "none";
+          sec.classList.remove("active");
         });
 
+        // Yangi tanlangan bo'limni ko'rsatish
         const target = document.getElementById(sectionId);
         if (target) {
           target.style.display = "block";
@@ -4093,7 +4036,34 @@
         }
       }
 
-      // oddiy toggle (submenu)
+      // YOUTUBE VIDEOLARNI DINAMIK QO'SHISH (Axborotchilar bo'limi uchun)
+      function playYouTube(videoId, containerId) {
+        const container = document.getElementById(containerId);
+
+        // Boshqa barcha videolarni to'xtatamiz
+        document
+          .querySelectorAll("video, audio")
+          .forEach((media) => media.pause());
+        document
+          .querySelectorAll(".video-player-container iframe")
+          .forEach((iframe) => {
+            iframe.src = iframe.src;
+          });
+
+        // Yangi iframe yaratish (autoplay olib tashlandi)
+        container.innerHTML = `
+      <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&modestbranding=1&rel=0&controls=1"
+        frameborder="0"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    `;
+      }
+
+      // SIDEBAR MENYULARNI OCHIB-YOPISH (Dropdown)
       function toggleDropdown(event, submenuId) {
         event.stopPropagation();
         const submenu = document.getElementById(submenuId);
@@ -4109,73 +4079,41 @@
         }
       }
 
-      // default sahifa ochish va submenu larni yopish
+      // SUBMENYULAR UCHUN ODDIY TOGGLE
+      function toggle(id) {
+        let el = document.getElementById(id);
+        if (el) {
+          el.style.display = el.style.display === "block" ? "none" : "block";
+        }
+      }
+
+      // AUDIO ISHLAGANDA BOSHQA AUDIOLARNI TO'XTATISH
+      function pauseOtherAudios(currentAudio) {
+        document.querySelectorAll("audio, video").forEach((media) => {
+          if (media !== currentAudio) {
+            media.pause();
+          }
+        });
+      }
+
+      // KARTOCHKALARGA BOSILGANDA WIKIPEDIAGA O'TISH
+      document.querySelectorAll(".small-card").forEach(function (card) {
+        card.addEventListener("click", function () {
+          let url = card.getAttribute("data-url");
+          if (url) {
+            window.open(url, "_blank");
+          }
+        });
+      });
+
+      // SAHIFA BIRINCHI YUKLANGANDA "HOME" BO'LIMINI OCHISH
       document.addEventListener("DOMContentLoaded", () => {
         showSection("home");
+        // Barcha submenyularni yopiq holatda ushlab turish
         document
           .querySelectorAll(".submenu")
           .forEach((sub) => (sub.style.display = "none"));
       });
-      // HTML5 audio larni faqat bitta o‘ynasin
-      function pauseOtherAudios(currentAudio) {
-        document.querySelectorAll("audio").forEach((audio) => {
-          if (audio !== currentAudio) {
-            audio.pause();
-            audio.currentTime = 0;
-          }
-        });
-
-        // video bo‘limlarni pauza qilish
-        document.querySelectorAll("video").forEach((video) => {
-          video.pause();
-          video.currentTime = 0;
-        });
-
-        // YouTube iframe larni pauza qilish
-        document
-          .querySelectorAll(".video-player-container iframe")
-          .forEach((iframe) => {
-            iframe.contentWindow.postMessage(
-              '{"event":"command","func":"pauseVideo","args":""}',
-              "*",
-            );
-          });
-      }
-      function showSection(sectionId) {
-        const sections = document.querySelectorAll(".section");
-        sections.forEach((sec) => {
-          sec.style.display = "none";
-          sec.classList.remove("active");
-
-          // HTML5 video larni pauza qilish
-          sec.querySelectorAll("video").forEach((v) => {
-            v.pause();
-            v.currentTime = 0;
-          });
-
-          // HTML5 audio larni pauza qilish
-          sec.querySelectorAll("audio").forEach((a) => {
-            a.pause();
-            a.currentTime = 0;
-          });
-
-          // YouTube iframe larni pauza qilish
-          sec
-            .querySelectorAll(".video-player-container iframe")
-            .forEach((iframe) => {
-              iframe.contentWindow.postMessage(
-                '{"event":"command","func":"pauseVideo","args":""}',
-                "*",
-              );
-            });
-        });
-
-        const target = document.getElementById(sectionId);
-        if (target) {
-          target.style.display = "block";
-          target.classList.add("active");
-        }
-      }
     </script>
   </body>
 </html>
