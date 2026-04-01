@@ -136,6 +136,34 @@
         display: none;
         padding-left: 15px;
       }
+      /* Sidebar linklarini toqroq va biroz kattaroq qilish */
+      .sidebar-link {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 6px 12px;
+        font-weight: 700; /* bold (toqroq) */
+        font-size: 16px; /* biroz kattaroq text */
+        color: #605520;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+
+      .sidebar-link:hover {
+        background-color: #d9c97c; /* hover effekt */
+      }
+
+      /* Arrow belgisi */
+      .sidebar-link .arrow {
+        margin-right: 8px;
+        transition: transform 0.3s;
+      }
+
+      .sidebar-link.active .arrow {
+        transform: rotate(180deg); /* ▽ → △ */
+      }
 
       /* CONTENT */
       .content {
@@ -436,6 +464,37 @@
       .sheva-table tr:nth-child(even) {
         background-color: #fafafa; /* juft qatorlar rangi */
       }
+      .sheva-table tr:nth-child(even) {
+        background-color: #fafafa;
+      }
+
+      /* 🔽 SHU YERGA QO‘SHASIZ */
+      .field {
+        margin-bottom: 10px;
+      }
+
+      .field label {
+        display: block;
+        font-size: 12px;
+        color: #777;
+      }
+
+      .field input,
+      .field textarea {
+        display: block;
+        min-width: 250px;
+        line-height: 1.5;
+        font-size: 14px;
+      }
+
+      input[type="submit"] {
+        display: block;
+        padding: 6px 30px;
+        font-size: 14px;
+        background-color: #4460aa;
+        color: #fff;
+        border: none;
+      }
     </style>
   </head>
 
@@ -451,7 +510,7 @@
       <!-- SIDEBAR -->
       <aside class="sidebar">
         <ul>
-          <li>
+          <li class="sidebar-link">
             <a
               href="#home"
               onclick="
@@ -461,7 +520,7 @@
               >Turk-barlos shevalari</a
             >
           </li>
-          <li>
+          <li class="sidebar-link">
             <a
               href="#alifbo"
               onclick="
@@ -471,17 +530,22 @@
               >Alifbo</a
             >
           </li>
-          <li>
+          <li class="sidebar-link">
             <a
               href="#sozlar"
               onclick="
                 showSection('sozlar');
                 return false;
               "
-              >Sozlar jadvali</a
+              >Turk-barlos dialekti leksikoni</a
             >
           </li>
-          <li onclick="toggle('jadvalMenu')">Qiyosiy jadval</li>
+          <li
+            class="sidebar-link"
+            onclick="toggleDropdown(event, 'jadvalMenu')"
+          >
+            <span class="arrow">▽</span> Qiyosiy jadval
+          </li>
           <ul id="jadvalMenu" class="submenu">
             <li onclick="showSection('j1')">
               1. Devonu lug'otit turk bilan Andijon turk-barloslari shevasining
@@ -491,14 +555,16 @@
               2. Boshqa shevalarda uchramaydigan so'zlar
             </li>
             <li onclick="showSection('j3')">
-              3. Vodiy va vohda yashovchi turk-barlos shevalarining qiyosi
+              3. Vodiy va vohada yashovchi turk-barloslarning shevasi qiyosi
             </li>
             <li onclick="showSection('j4')">
-              4. Andijon, Buloqboshi va Aravon turk-barlos shevalarining qiyosi
+              4. Marhamat, Buloqboshi va Aravon turk-barlos shevalarining qiyosi
             </li>
           </ul>
 
-          <li onclick="toggle('videoMenu')">Video materiallar</li>
+          <li class="sidebar-link" onclick="toggle('videoMenu')">
+            <span class="arrow">▽</span>Video materiallar
+          </li>
           <ul id="videoMenu" class="submenu">
             <li onclick="showSection('f1')">
               1. Qayerdan ko'chib kelganingiz va qaysi urug'ga mansub
@@ -513,14 +579,16 @@
             </li>
           </ul>
 
-          <li onclick="toggle('axborotMenu')">Axborotchilar</li>
+          <li class="sidebar-link" onclick="toggle('axborotMenu')">
+            <span class="arrow">▽</span>Axborotchilar
+          </li>
           <ul id="axborotMenu" class="submenu">
             <li onclick="showSection('ax1')">1. Marhamat tuman</li>
             <li onclick="showSection('ax2')">2. Buloqboshi tuman</li>
             <li onclick="showSection('ax3')">3. Aravon tuman</li>
             <li onclick="showSection('ax_full')">To‘liq ro‘yxat</li>
           </ul>
-          <li>
+          <li class="sidebar-link">
             <a
               href="#ertak"
               onclick="
@@ -530,7 +598,7 @@
               >Ertak</a
             >
           </li>
-          <li>
+          <li class="sidebar-link">
             <a
               href="#topishmoq"
               onclick="
@@ -540,7 +608,7 @@
               >Topishmoq</a
             >
           </li>
-          <li>
+          <li class="sidebar-link">
             <a
               href="#maqol"
               onclick="
@@ -550,13 +618,15 @@
               >Maqol</a
             >
           </li>
-          <li onclick="toggle('qoshiqMenu')">Qo'shiqlar</li>
+          <li class="sidebar-link" onclick="toggle('qoshiqMenu')">
+            <span class="arrow">▽</span>Qo'shiqlar
+          </li>
           <ul id="qoshiqMenu" class="submenu">
             <li onclick="showSection('q1')">1. Kelin salom</li>
             <li onclick="showSection('q2')">2. Yor-yor</li>
             <li onclick="showSection('q3')">3. Ona</li>
           </ul>
-          <li>
+          <li class="sidebar-link">
             <a
               href="#audio"
               onclick="
@@ -566,7 +636,7 @@
               >Audio materiallar</a
             >
           </li>
-          <li>
+          <li class="sidebar-link">
             <a
               href="#contact"
               onclick="
@@ -887,7 +957,7 @@
 
         <!-- SOZLAR JADVALI -->
         <div id="sozlar" class="section">
-          <h2>Sozlar jadvali</h2>
+          <h2>Turk-barlos dialekti leksikoni</h2>
           <div class="sheva-table-wrapper">
             <table class="sheva-table">
               <thead>
@@ -2225,25 +2295,26 @@
         </div>
         <div id="j1" class="section">
           <h2>
-            devonu lug‘otit turk bilan andijon turk-barlos shevasining qiyosi
+            DEVONU LUG‘OTIT TURK BILAN ANDIJON TURK-BARLOSLARI SHEVASINING
+            QIYOSI
           </h2>
 
           <div class="sheva-table-wrapper">
             <p>
-              quyida keltirilgan jadvalda 1961-yilda s.m.mutallibov tomonidan
-              nashrga tayyorlangan, m.koshg‘ariyning “devonu lug‘otit turk”
-              nomli asaridagi so‘zlar andijon turk-barlos shevasidagi so‘zlar
-              bilan qiyoslandi. jadvalda devonu lug‘otit turk dlt shaklida
+              Quyida keltirilgan jadvalda 1961-yilda S.M.Mutallibov tomonidan
+              nashrga tayyorlangan, M.Koshg‘ariyning “Devonu lug‘otit turk”
+              nomli asaridagi so‘zlar Andijon turk-barlos shevasidagi so‘zlar
+              bilan qiyoslandi. Jadvalda, Devonu lug‘otit turk-DLT shaklida
               berildi.
             </p>
 
             <table class="sheva-table">
               <thead>
                 <tr>
-                  <th>andijon turk-barlos</th>
-                  <th>izoh</th>
-                  <th>dlt da</th>
-                  <th>adabiy tilda</th>
+                  <th>Andijon turk-barlos</th>
+                  <th>Izoh</th>
+                  <th>DLT da</th>
+                  <th>Adabiy tilda</th>
                 </tr>
               </thead>
 
@@ -2417,8 +2488,8 @@
         <div id="j2" class="section">
           <div class="sheva-table-wrapper">
             <p>
-              quyida keltirilgan jadvalda bo‘ri xasanovning 1980 yilda yozilgan
-              “исследования узбекских говоров типа турк-барлас” nomli nomzodlik
+              Quyida keltirilgan jadvalda Bo‘ri Xasanovning 1980 yilda yozilgan
+              “Исследования узбекских говоров типа турк-барлас” nomli nomzodlik
               dissertatsiyasida keltirilgan boshqa shevalarda uchramaydigan
               so‘zlar jadvalini andijon turk-barlos shevasiga qiyosladik.
             </p>
@@ -2426,9 +2497,9 @@
             <table class="sheva-table">
               <thead>
                 <tr>
-                  <th>boshqa shevalarda uchramaydigan so‘zlar (b.xasanov)</th>
-                  <th>andijon turk-barlos</th>
-                  <th>adabiy til</th>
+                  <th>Turk-barlos(B.Xasanov)</th>
+                  <th>Andijon turk-barlos</th>
+                  <th>Adabiy til</th>
                 </tr>
               </thead>
 
@@ -2532,10 +2603,14 @@
           <p>Vodiy va vohda shevalari farqlari.</p>
           <div class="sheva-table-wrapper">
             <p>
-              Quyidagi jadvalda Andijon viloyatining Marhamat, Buloqboshi va
-              Qirg‘izistonning Aravon tumanlari turk-barlos shevasi, shuningdek
-              Bo‘ri Xasanovning 1980 yilda yozilgan dissertatsiyasidagi
-              Samarqand, Tojikiston va Qashqadaryo shevalari bilan qiyoslangan.
+              Quyida keltirilgan jadvalda bizning tadqiqot obyektimiz bo‘lgan
+              Andijon viloyatining Marhamat, Buloqboshi va Qirg‘izistonning
+              Aravon tumanlari turk-barlos shevasi, Bo‘ri Xasanovning 1980 yilda
+              yozilgan “Исследования узбекских говоров типа турк-барлас” nomli
+              nomzodlik dissertatsiyasida tadqiqot obyekti bo‘lgan Samarqand
+              viloyati Urgut tumani Tersak qishlog‘i, Tojikistonning Pnjikent
+              tumani Sudjin qishlog‘i, Qashqadaryo viloyati Kitob tumani
+              Tashkalak qishlog‘i shevalari qiyoslandi.
             </p>
             <table class="sheva-table">
               <thead>
@@ -2914,7 +2989,7 @@
 
         <div id="j4" class="section">
           <h2>
-            4. Andijon, Buloqboshi va Aravon turk-barlos shevalarining qiyosi
+            4. Marhamat, Buloqboshi va Aravon turk-barlos shevalarining qiyosi
           </h2>
           <div class="sheva-table-wrapper">
             <table class="sheva-table">
@@ -3200,7 +3275,7 @@
         <div id="f1" class="section">
           <h2>
             1. Qayerdan ko‘chib kelganingiz va qaysi urug‘ga mansub ekanligingiz
-            haqidabilasizmi?
+            haqida bilasizmi?
           </h2>
           <p>Hududiy axborot va video.</p>
 
@@ -3664,67 +3739,19 @@
         <div id="q1" class="section">
           <h2>1. Kelin salom</h2>
           <p>Qo'shiq matni yoki tavsifi.</p>
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/FE1EtjNCfoQ "
-            title="YouTube video player"
-            frameborder="0"
-            allow="
-              accelerometer;
-              autoplay;
-              clipboard-write;
-              encrypted-media;
-              gyroscope;
-              picture-in-picture;
-            "
-            allowfullscreen
-          >
-          </iframe>
+          <div id="player1"></div>
         </div>
 
         <div id="q2" class="section">
           <h2>2. Yor-yor</h2>
           <p>Qo'shiq matni yoki tavsifi.</p>
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/7qSXDJIFFjk"
-            title="YouTube video player"
-            frameborder="0"
-            allow="
-              accelerometer;
-              autoplay;
-              clipboard-write;
-              encrypted-media;
-              gyroscope;
-              picture-in-picture;
-            "
-            allowfullscreen
-          >
-          </iframe>
+          <div id="player2"></div>
         </div>
 
         <div id="q3" class="section">
           <h2>3. Ona</h2>
           <p>Qo'shiq matni yoki tavsifi.</p>
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/L78lJLuue1I "
-            title="YouTube video player"
-            frameborder="0"
-            allow="
-              accelerometer;
-              autoplay;
-              clipboard-write;
-              encrypted-media;
-              gyroscope;
-              picture-in-picture;
-            "
-            allowfullscreen
-          >
-          </iframe>
+          <div id="player3"></div>
         </div>
 
         <!-- AUDIO MATERIALLAR -->
@@ -3737,7 +3764,11 @@
               <div class="audio-thumb">🎵</div>
               <div class="audio-info">
                 <h4>97 yosh</h4>
-                <audio controls controlsList="nodownload">
+                <audio
+                  controls
+                  controlsList="nodownload"
+                  onplay="pauseOtherAudios(this)"
+                >
                   <source src="audios/97_yosh.mp3" type="audio/mp3" />
                 </audio>
               </div>
@@ -3747,7 +3778,11 @@
               <div class="audio-thumb">🎵</div>
               <div class="audio-info">
                 <h4>Ilon voqe</h4>
-                <audio controls controlsList="nodownload">
+                <audio
+                  controls
+                  controlsList="nodownload"
+                  onplay="pauseOtherAudios(this)"
+                >
                   <source src="audios/Ilon_voqe.mp3" type="audio/mp3" />
                 </audio>
               </div>
@@ -3757,7 +3792,11 @@
               <div class="audio-thumb">🎵</div>
               <div class="audio-info">
                 <h4>Qarabog‘ish</h4>
-                <audio controls controlsList="nodownload">
+                <audio
+                  controls
+                  controlsList="nodownload"
+                  onplay="pauseOtherAudios(this)"
+                >
                   <source src="audios/Qarabogish.mp3" type="audio/mp3" />
                 </audio>
               </div>
@@ -3767,7 +3806,11 @@
               <div class="audio-thumb">🎵</div>
               <div class="audio-info">
                 <h4>Голос 011</h4>
-                <audio controls controlsList="nodownload">
+                <audio
+                  controls
+                  controlsList="nodownload"
+                  onplay="pauseOtherAudios(this)"
+                >
                   <source src="audios/ovoz_011.mp3" type="audio/mp3" />
                 </audio>
               </div>
@@ -3783,17 +3826,17 @@
             <a href="mailto:turkbarlossheva@gmail.com"
               >Gmail: turkbarlossheva@gmail.com</a
             >
-            <a href="tel:+998931332920">Telefon: +998 93 133 29 20</a>
+            <a href="https://t.me/Marifat_Prof">Telegram: @Marifat_Prof</a>
           </div>
 
           <div class="contact-form">
-            <form id="contact-form">
+            <form id="form">
               <div class="form-group">
                 <label for="name">Ismingiz</label>
                 <input
                   type="text"
                   id="name"
-                  name="name"
+                  name="from_name"
                   placeholder="Ismingizni kiriting"
                   required
                 />
@@ -3804,7 +3847,7 @@
                 <input
                   type="email"
                   id="email"
-                  name="email"
+                  name="from_email"
                   placeholder="Emailingizni kiriting"
                   required
                 />
@@ -3820,46 +3863,57 @@
                 ></textarea>
               </div>
 
+              <!-- time yashirin -->
+              <input type="hidden" name="time" id="time" />
+
               <div class="form-group checkbox-group">
-                <input type="checkbox" id="agree" name="agree" required />
+                <input type="checkbox" id="agree" required />
                 <label for="agree">Rozi bo'lish</label>
               </div>
 
-              <button type="submit" class="btn-submit">Yuborish</button>
+              <button type="submit" id="button" class="btn-submit">
+                Yuborish
+              </button>
             </form>
           </div>
         </div>
         <!-- EMAILJS SDK -->
-        <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+        <!-- EmailJS SDK (faqat bittasi kerak!) -->
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
         <script>
-          emailjs.init("YOUR_PUBLIC_KEY"); // <-- Bu yerga EmailJS public key qo'ying
+          // Public key
+          emailjs.init("D6wjWmLaeJVYKVdaZ");
+
+          const btn = document.getElementById("button");
 
           document
-            .getElementById("contact-form")
+            .getElementById("form")
             .addEventListener("submit", function (event) {
               event.preventDefault();
 
-              const form = event.target;
-              const formData = {
-                from_name: form.name.value,
-                from_email: form.email.value,
-                message: form.message.value,
-              };
+              btn.innerText = "Yuborilmoqda...";
 
-              emailjs
-                .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData) // <-- Service ID va Template ID qo'ying
-                .then(
-                  function (response) {
-                    alert("Rahmat! Sizning xabaringiz yuborildi.");
-                    form.reset();
-                  },
-                  function (error) {
-                    alert(
-                      "Xatolik yuz berdi. Iltimos, keyinroq urinib ko‘ring.",
-                    );
-                    console.log(error);
-                  },
-                );
+              // time ni avtomatik beramiz
+              document.getElementById("time").value =
+                "____ " + new Date().toLocaleString();
+
+              // ❗ MUHIM: sizning service va template
+              const serviceID = "service_pvvz8w8";
+              const templateID = "template_ech4qe8";
+
+              emailjs.sendForm(serviceID, templateID, this).then(
+                () => {
+                  btn.innerText = "Yuborish";
+                  alert("✅ Xabar yuborildi!");
+                  this.reset();
+                },
+                (err) => {
+                  btn.innerText = "Yuborish";
+                  alert("❌ Xatolik yuz berdi");
+                  console.log(err);
+                },
+              );
             });
         </script>
 
@@ -3897,26 +3951,49 @@
     </div>
 
     <script>
-      function showSection(id) {
-        document
-          .querySelectorAll(".section")
-          .forEach((s) => s.classList.remove("active"));
-        let section = document.getElementById(id);
-        if (section) {
-          section.classList.add("active");
+      // Bo‘limlarni ko‘rsatish va videolarni pauza qilish
+      function showSection(sectionId) {
+        // Barcha bo‘limlarni yopish
+        const sections = document.querySelectorAll(".section");
+        sections.forEach((sec) => {
+          sec.style.display = "none";
+
+          // Agar bo‘lim ichida video bo‘lsa, pauza berish va boshiga qaytarish
+          const videos = sec.querySelectorAll("video");
+          videos.forEach((v) => {
+            v.pause();
+            v.currentTime = 0; // optional: video boshiga qaytarish
+          });
+
+          // Active klassini olib tashlash (belgi uchun)
+          sec.classList.remove("active");
+        });
+
+        // Tanlangan bo‘limni ko‘rsatish
+        const target = document.getElementById(sectionId);
+        if (target) {
+          target.style.display = "block";
+          target.classList.add("active"); // optional, agar CSS bilan ishlatmoqchi bo‘lsangiz
         }
       }
 
-      // default opening
-      document.addEventListener("DOMContentLoaded", function () {
-        showSection("home");
-      });
+      // Sidebar dropdown toggle
+      function toggleDropdown(event, sectionId) {
+        event.preventDefault();
 
-      function toggle(id) {
-        let el = document.getElementById(id);
-        el.style.display = el.style.display === "block" ? "none" : "block";
+        const section = document.getElementById(sectionId);
+        const link = event.currentTarget;
+
+        if (section.style.display === "none" || section.style.display === "") {
+          section.style.display = "block";
+          link.classList.add("active"); // belgi aylanishi uchun
+        } else {
+          section.style.display = "none";
+          link.classList.remove("active");
+        }
       }
 
+      // Video o‘ynatish va bo‘limga o‘tish
       function playVideo(file, playerId = "player", sectionId = "video") {
         if (sectionId) {
           showSection(sectionId);
@@ -3929,6 +4006,25 @@
         }
       }
 
+      // Default sahifa ochilishi
+      document.addEventListener("DOMContentLoaded", function () {
+        showSection("home");
+      });
+
+      // Oddiy toggle uchun
+      function toggle(id) {
+        let el = document.getElementById(id);
+        el.style.display = el.style.display === "block" ? "none" : "block";
+      }
+
+      // Kontakt form submit
+      function handleContactSubmit(event) {
+        event.preventDefault();
+        alert("Rahmat! Sizning xabaringiz yuborildi.");
+        event.target.reset();
+      }
+
+      // Card click
       document.querySelectorAll(".small-card").forEach(function (card) {
         card.addEventListener("click", function () {
           let url = card.getAttribute("data-url");
@@ -3938,10 +4034,147 @@
         });
       });
 
-      function handleContactSubmit(event) {
-        event.preventDefault();
-        alert("Rahmat! Sizning xabaringiz yuborildi.");
-        event.target.reset();
+      // YouTube video o‘ynatish (iframe bilan)
+      function playYouTube(videoId, containerId) {
+        const container = document.getElementById(containerId);
+
+        // avval barcha videolarni pauza qilamiz
+        document.querySelectorAll("video").forEach((v) => v.pause());
+        document
+          .querySelectorAll(".video-player-container iframe")
+          .forEach((iframe) => {
+            iframe.contentWindow.postMessage(
+              '{"event":"command","func":"pauseVideo","args":""}',
+              "*",
+            );
+          });
+
+        // iframe yaratish
+        container.innerHTML = `
+    <iframe
+      width="100%"
+      height="315"
+      src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&modestbranding=1&rel=0&controls=1"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  `;
+      }
+
+      // showSection funksiyasi bo‘limni ko‘rsatadi va video pauza qiladi
+      function showSection(sectionId) {
+        const sections = document.querySelectorAll(".section");
+        sections.forEach((sec) => {
+          sec.style.display = "none";
+          sec.classList.remove("active");
+
+          // video pauza qilish
+          sec.querySelectorAll("video").forEach((v) => {
+            v.pause();
+            v.currentTime = 0;
+          });
+
+          // YouTube iframe pauza
+          sec
+            .querySelectorAll(".video-player-container iframe")
+            .forEach((iframe) => {
+              iframe.contentWindow.postMessage(
+                '{"event":"command","func":"pauseVideo","args":""}',
+                "*",
+              );
+            });
+        });
+
+        const target = document.getElementById(sectionId);
+        if (target) {
+          target.style.display = "block";
+          target.classList.add("active");
+        }
+      }
+
+      // oddiy toggle (submenu)
+      function toggleDropdown(event, submenuId) {
+        event.stopPropagation();
+        const submenu = document.getElementById(submenuId);
+        if (!submenu) return;
+
+        const isOpen = submenu.style.display === "block";
+        submenu.style.display = isOpen ? "none" : "block";
+
+        const parent = event.currentTarget;
+        if (parent) {
+          if (isOpen) parent.classList.remove("active");
+          else parent.classList.add("active");
+        }
+      }
+
+      // default sahifa ochish va submenu larni yopish
+      document.addEventListener("DOMContentLoaded", () => {
+        showSection("home");
+        document
+          .querySelectorAll(".submenu")
+          .forEach((sub) => (sub.style.display = "none"));
+      });
+      // HTML5 audio larni faqat bitta o‘ynasin
+      function pauseOtherAudios(currentAudio) {
+        document.querySelectorAll("audio").forEach((audio) => {
+          if (audio !== currentAudio) {
+            audio.pause();
+            audio.currentTime = 0;
+          }
+        });
+
+        // video bo‘limlarni pauza qilish
+        document.querySelectorAll("video").forEach((video) => {
+          video.pause();
+          video.currentTime = 0;
+        });
+
+        // YouTube iframe larni pauza qilish
+        document
+          .querySelectorAll(".video-player-container iframe")
+          .forEach((iframe) => {
+            iframe.contentWindow.postMessage(
+              '{"event":"command","func":"pauseVideo","args":""}',
+              "*",
+            );
+          });
+      }
+      function showSection(sectionId) {
+        const sections = document.querySelectorAll(".section");
+        sections.forEach((sec) => {
+          sec.style.display = "none";
+          sec.classList.remove("active");
+
+          // HTML5 video larni pauza qilish
+          sec.querySelectorAll("video").forEach((v) => {
+            v.pause();
+            v.currentTime = 0;
+          });
+
+          // HTML5 audio larni pauza qilish
+          sec.querySelectorAll("audio").forEach((a) => {
+            a.pause();
+            a.currentTime = 0;
+          });
+
+          // YouTube iframe larni pauza qilish
+          sec
+            .querySelectorAll(".video-player-container iframe")
+            .forEach((iframe) => {
+              iframe.contentWindow.postMessage(
+                '{"event":"command","func":"pauseVideo","args":""}',
+                "*",
+              );
+            });
+        });
+
+        const target = document.getElementById(sectionId);
+        if (target) {
+          target.style.display = "block";
+          target.classList.add("active");
+        }
       }
     </script>
   </body>
