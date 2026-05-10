@@ -86,6 +86,12 @@
         font-family: Arial;
         background: #f5f2d0;
         color: #8b6f47;
+
+        /* Quyidagilarni qo'shing: */
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; /* Umumiy sahifa harakatlanishini to'xtatadi */
       }
       header {
         background: #d9c97c;
@@ -93,6 +99,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        /* Quyidagini qo'shing: */
+        flex-shrink: 0;
       }
       header h1 {
         font-size: 22px;
@@ -105,6 +114,10 @@
       /* CONTAINER */
       .container {
         display: flex;
+
+        /* Quyidagilarni qo'shing: */
+        flex: 1; /* Header'dan ortib qolgan barcha joyni egallaydi */
+        overflow: hidden;
       }
 
       /* SIDEBAR */
@@ -112,7 +125,10 @@
         width: 220px;
         background-color: #eee6b5;
         padding: 20px;
-        min-height: 100%; /* Sahifa balandligiga moslashadi */
+
+        /* Quyidagini qo'shing: */
+        overflow-y: auto;
+        /* min-height: 100%;  <-- Agar shu qator bo'lsa, uni o'chirib tashlang */
       }
 
       .sidebar li {
@@ -169,6 +185,9 @@
       .content {
         flex: 1;
         padding: 20px;
+
+        /* Quyidagini qo'shing: */
+        overflow-y: auto;
       }
       .section {
         display: none;
@@ -495,15 +514,122 @@
         color: #fff;
         border: none;
       }
+      /* Faol (bosilgan) menyu uchun yozuv rangini o'zgartirish */
+      .active-menu {
+        color: #d9691c !important; /* Olovrang tus */
+        font-weight: bold !important;
+      }
+
+      /* Ichki menyular ustiga borganda ham chiroyli rangga kirishi uchun */
+      .submenu li {
+        transition: color 0.2s;
+      }
+      .submenu li:hover {
+        color: #d9691c;
+      }
+      /* Video joylashuvini chapga o'tkazish */
+      .video-layout {
+        display: flex;
+        flex-direction: row-reverse; /* Ro'yxatni chapga, videoni o'ngga suradi */
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      /* Videolar ro'yxati konteyneri */
+      .video-list-container {
+        width: 300px; /* Ro'yxat kengligi */
+        flex-shrink: 0;
+      }
+
+      /* "Videoni tanlang" matni uchun stil */
+      .video-list-title {
+        font-weight: bold;
+        color: #5d462a; /* To'qroq rang */
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        display: block;
+      }
+
+      /* Asosiy video oynasi kengayishi uchun */
+      .main-video {
+        flex: 1;
+      }
+      /* Video va ro'yxatni o'raydigan asosiy blok */
+      .section {
+        padding: 10px !important; /* Bo'limning ichki bo'shlig'ini kamaytirish */
+      }
+
+      /* Video va ro'yxatni o'raydigan blok */
+      .video-section-inner {
+        display: flex;
+        flex-direction: row-reverse; /* Ro'yxat chapda, video o'ngda */
+        justify-content: flex-end; /* Elementlarni chap tomonga zichlaydi */
+        gap: 15px; /* O'rta dagi bo'shliqni biroz kamaytirdik */
+        margin-top: 15px;
+        width: 100%;
+
+        /* O'ng tarafdagi asosiy video pleyer */
+        /* Asosiy video pleyer konteyneri */
+        .video-player-container {
+          flex: 1; /* Qolgan barcha bo'sh joyni egallaydi */
+          min-height: 450px;
+          background-color: #000;
+          border-radius: 8px;
+        }
+
+        /* Chap tarafdagi ro'yxat konteyneri */
+        /* Chap tarafdagi ro'yxat konteyneri */
+        .video-text-list {
+          width: 220px; /* Kenglikni biroz kamaytirdik */
+          flex-shrink: 0;
+          margin-left: 0; /* Chapdan masofani nolga tushirdik */
+        }
+
+        /* "Videoni tanlang" sarlavhasi (CSS orqali qo'shish) */
+        /* "Videoni tanlang" matni */
+        .video-text-list::before {
+          content: "Videoni tanlang:";
+          display: block;
+          font-weight: bold;
+          color: #3e2723;
+          margin-bottom: 8px;
+          text-align: left; /* Matnni ham chapga tekislash */
+        }
+
+        /* Ro'yxat elementlari */
+        /* Ro'yxat elementlari */
+        .video-text-item {
+          background: #eee6b5;
+          padding: 8px 12px;
+          margin-bottom: 5px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 14px;
+          text-align: left; /* Yozuvni blok ichida chapga surish */
+        }
+
+        .video-text-item:hover {
+          background: #d9c97c;
+        }
+        /* Asosiy konteynerdagi bo'shliqni kamaytiramiz */
+      }
+
+      /* Mobil qurilmalar uchun moslashuv */
+      @media (max-width: 768px) {
+        .video-section-inner {
+          flex-direction: column; /* Mobil telefonda video tepada, ro'yxat pastda */
+        }
+        .video-text-list {
+          width: 100%;
+        }
+      }
     </style>
   </head>
 
   <body>
     <header>
-      <h1>
-        Turk-Barloslar shevalari <br />
-        29.03.2026
-      </h1>
+      <h1>Turk-Barloslar shevalari <br /></h1>
+      <p>29.03.2026</p>
     </header>
 
     <div class="container">
@@ -3814,7 +3940,7 @@
             <div class="audio-item">
               <div class="audio-thumb">🎵</div>
               <div class="audio-info">
-                <h4>97 yosh</h4>
+                <h4>Marahamat. tum. Chekobot qishlogʻi.</h4>
                 <audio
                   controls
                   controlsList="nodownload"
@@ -3828,7 +3954,7 @@
             <div class="audio-item">
               <div class="audio-thumb">🎵</div>
               <div class="audio-info">
-                <h4>Ilon voqe</h4>
+                <h4>Marhamat tum. Rohat qishlogʻi.</h4>
                 <audio
                   controls
                   controlsList="nodownload"
@@ -3842,7 +3968,7 @@
             <div class="audio-item">
               <div class="audio-thumb">🎵</div>
               <div class="audio-info">
-                <h4>Qarabog‘ish</h4>
+                <h4>Marhamat tum. Qoraboʼgʻish qishlogʻi.</h4>
                 <audio
                   controls
                   controlsList="nodownload"
@@ -3856,7 +3982,7 @@
             <div class="audio-item">
               <div class="audio-thumb">🎵</div>
               <div class="audio-info">
-                <h4>Голос 011</h4>
+                <h4>Marhamat tum. Qoraboʼgʻish qishlogʻi.</h4>
                 <audio
                   controls
                   controlsList="nodownload"
@@ -4111,10 +4237,36 @@
       // SAHIFA BIRINCHI YUKLANGANDA "HOME" BO'LIMINI OCHISH
       document.addEventListener("DOMContentLoaded", () => {
         showSection("home");
+
         // Barcha submenyularni yopiq holatda ushlab turish
         document
           .querySelectorAll(".submenu")
           .forEach((sub) => (sub.style.display = "none"));
+
+        // ==========================================
+        // Yozuv rangini o'zgartirish mantiqi (YANGI QO'SHILDI)
+        // ==========================================
+
+        // Faqat bosilganda sahifa o'zgaradigan linklarni topib olamiz
+        const allMenuLinks = document.querySelectorAll(
+          ".sidebar a, .submenu li",
+        );
+
+        allMenuLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            // 1. Oldin hamma menyulardan .active-menu klassini olib tashlaymiz
+            allMenuLinks.forEach((l) => l.classList.remove("active-menu"));
+
+            // 2. Faqat hozirgina bosilgan menyuga shu klassni qo'shamiz
+            this.classList.add("active-menu");
+          });
+        });
+
+        // Dastlab sahifa yuklanganda 1-menyuni (Turk-barlos shevalari) faol qilib qo'yish
+        const firstLink = document.querySelector('.sidebar a[href="#home"]');
+        if (firstLink) {
+          firstLink.classList.add("active-menu");
+        }
       });
     </script>
   </body>
